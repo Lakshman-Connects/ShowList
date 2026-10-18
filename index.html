@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shows List</title>
+<script>try{var q=JSON.parse(localStorage.getItem("q-theme-v1"));if(q)document.documentElement.setAttribute("data-theme",q)}catch(e){}</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Fredoka:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#e3e6ef;--bg2:#d9dde9;--panel:#f3f4f9;--panel2:#e8eaf3;--ink:#252a3b;--mute:#677089;--line:#cfd4e3;
+--acc:#2a8a86;--onacc:#f3f6f5;--ind:#5266b0;--plum:#8a5a85;--amber:#b4782f;--sage:#4f9068;--rose:#b55f6a;
+--acc-bg:rgba(42,138,134,.14);--ind-bg:rgba(82,102,176,.15);--plum-bg:rgba(138,90,133,.15);--sage-bg:rgba(79,144,104,.15);--amber-bg:rgba(180,120,47,.17);--rose-bg:rgba(181,95,106,.15);
+--aired:#3f8a5c;--unk:#a06a22;--bad:#b55f6a;--soon:#efe0b8;--hover:rgba(82,102,176,.10);--alt:rgba(82,102,176,.045);--tick:#d3e4d3;
+--hd:#333f78;--hd2:#2c6a75;--hd3:#4b3f78;--hdt:#eceaf3;--th:#dfe4f3;--tht:#4d5470;
+--p-o:#4a5ca8;--p-o2:#3d8088;--p-t:#7b4f7c;--p-t2:#a0566a;--pt:#f1eef5;--btn:#5266b0;--btn2:#3d8f94;--bt:#f5f4fa;
+--sh:0 1px 2px rgba(37,42,80,.10),0 6px 18px rgba(37,42,80,.08);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="vibrant"]):not([data-theme="dark"]){--bg:#111522;--bg2:#0c101a;--panel:#1a2031;--panel2:#232b40;--ink:#dcdbe6;--mute:#8c94ad;--line:#2d3550;
+--acc:#5fc4be;--onacc:#0e2220;--ind:#8d9de0;--plum:#c298b8;--amber:#e0b472;--sage:#8cc79d;--rose:#e29aa4;
+--acc-bg:rgba(95,196,190,.16);--ind-bg:rgba(141,157,224,.17);--plum-bg:rgba(194,152,184,.17);--sage-bg:rgba(140,199,157,.16);--amber-bg:rgba(224,180,114,.17);--rose-bg:rgba(226,154,164,.16);
+--aired:#8cc79d;--unk:#e0b472;--bad:#e29aa4;--soon:#3b3522;--hover:rgba(141,157,224,.13);--alt:rgba(141,157,224,.05);--tick:#25382d;
+--hd:#232c58;--hd2:#1d4a54;--hd3:#352c58;--hdt:#e6e5f0;--th:#212a44;--tht:#a1a9c4;
+--p-o:#33428a;--p-o2:#2a6068;--p-t:#5a3a68;--p-t2:#7a4658;--pt:#e6e2f0;--btn:#4252a8;--btn2:#2f808a;--bt:#eceef8;
+--sh:0 1px 2px rgba(0,0,0,.4),0 8px 22px rgba(0,0,0,.3);color-scheme:dark}}
+:root[data-theme="vibrant"]{--ff:"Fredoka","Instrument Sans",system-ui,sans-serif;
+--bg:#ffd9ee;--bg2:#e0d4ff;--panel:#fffafd;--panel2:#ffeaf6;--ink:#3b1d5a;--mute:#8a5fa8;--line:#f6c3e2;
+--acc:#0aa89b;--onacc:#ffffff;--ind:#7b4dff;--plum:#d63ab0;--amber:#ff8a1f;--sage:#22b866;--rose:#ff3d8b;
+--acc-bg:rgba(10,168,155,.18);--ind-bg:rgba(123,77,255,.18);--plum-bg:rgba(214,58,176,.18);--sage-bg:rgba(34,184,102,.18);--amber-bg:rgba(255,138,31,.2);--rose-bg:rgba(255,61,139,.18);
+--aired:#12a35c;--unk:#e07a00;--bad:#e0245e;--soon:#fff0a0;--hover:rgba(255,61,139,.12);--alt:rgba(123,77,255,.06);--tick:#c6f5da;
+--hd:#ff3d8b;--hd2:#a64dff;--hd3:#17b8ff;--hdt:#ffffff;--th:#ffe0f1;--tht:#8a2f6e;
+--p-o:#7b4dff;--p-o2:#17b8ff;--p-t:#ff3d8b;--p-t2:#ff8a1f;--pt:#ffffff;--btn:#ff3d8b;--btn2:#8a4dff;--bt:#ffffff;
+--sh:0 2px 4px rgba(214,58,176,.18),0 8px 22px rgba(123,77,255,.20)}
+:root[data-theme="dark"]{--bg:#0a0a0a;--bg2:#050505;--panel:#141414;--panel2:#1c1c1c;--ink:#e8e8e8;--mute:#999999;--line:#2c2c2c;
+--acc:#d2d2d2;--onacc:#0a0a0a;--ind:#bdbdbd;--plum:#a9a9a9;--amber:#c6c6c6;--sage:#b5b5b5;--rose:#d0d0d0;
+--acc-bg:rgba(255,255,255,.09);--ind-bg:rgba(255,255,255,.08);--plum-bg:rgba(255,255,255,.07);--sage-bg:rgba(255,255,255,.08);--amber-bg:rgba(255,255,255,.08);--rose-bg:rgba(255,255,255,.08);
+--aired:#dcdcdc;--unk:#a8a8a8;--bad:#e4e4e4;--soon:#2b2b2b;--hover:rgba(255,255,255,.07);--alt:rgba(255,255,255,.03);--tick:#262626;
+--hd:#1a1a1a;--hd2:#222222;--hd3:#2a2a2a;--hdt:#e8e8e8;--th:#1b1b1b;--tht:#b3b3b3;
+--p-o:#2d2d2d;--p-o2:#3b3b3b;--p-t:#262626;--p-t2:#353535;--pt:#e8e8e8;--btn:#3a3a3a;--btn2:#4a4a4a;--bt:#f0f0f0;
+--sh:0 1px 2px rgba(0,0,0,.6),0 8px 22px rgba(0,0,0,.5);color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:13px/1.3 var(--ff,"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif)}
+body{background:linear-gradient(180deg,var(--bg) 0,var(--bg2) 100%) fixed}
+main{max-width:1180px;margin:0 auto;padding:6px 8px 16px}
+.clocks{display:flex;flex-wrap:wrap;gap:2px 16px;padding:6px 12px;background:linear-gradient(110deg,var(--hd),var(--hd2) 55%,var(--hd3));color:var(--hdt);border-radius:10px;box-shadow:var(--sh);font-variant-numeric:tabular-nums}
+.clocks b{font-weight:600;margin-right:5px;opacity:.65;letter-spacing:.04em}.clocks span{white-space:nowrap}
+h2.sec{margin:12px 2px 3px;font-size:14px;font-weight:600;padding:1px 9px;border-left:4px solid var(--c,var(--acc));background:linear-gradient(90deg,var(--cb,var(--acc-bg)),transparent 70%);border-radius:0 6px 6px 0}
+#t1{--c:var(--ind);--cb:var(--ind-bg)}#t3{--c:var(--acc);--cb:var(--acc-bg)}#t3 h2.sec:nth-of-type(2){--c:var(--amber);--cb:var(--amber-bg)}#t2{--c:var(--sage);--cb:var(--sage-bg)}#t4{--c:var(--plum);--cb:var(--plum-bg)}
+.tabs{display:flex;gap:3px;margin:8px 0 0;padding:3px;background:var(--panel2);border:1px solid var(--line);border-radius:11px;overflow-x:auto}
+.tabs button{border:0;background:transparent;padding:5px 14px;border-radius:8px;font-weight:600;color:var(--mute);cursor:pointer;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{box-shadow:var(--sh);background:var(--panel)}
+.tabs button[data-t=t1][aria-selected=true]{color:var(--ind);background:linear-gradient(var(--ind-bg),var(--ind-bg)),var(--panel)}
+.tabs button[data-t=t2][aria-selected=true]{color:var(--sage);background:linear-gradient(var(--sage-bg),var(--sage-bg)),var(--panel)}
+.tabs button[data-t=t3][aria-selected=true]{color:var(--acc);background:linear-gradient(var(--acc-bg),var(--acc-bg)),var(--panel)}
+.tabs button[data-t=t4][aria-selected=true]{color:var(--plum);background:linear-gradient(var(--plum-bg),var(--plum-bg)),var(--panel)}
+.wip{padding:30px 8px;color:var(--mute)}
+#rpt{overflow-x:auto}
+.rt{table-layout:auto;width:100%;min-width:100%;margin:8px 0 14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:var(--sh);border-collapse:separate;border-spacing:0}
+.rt th,.rt td{padding:5px 9px;vertical-align:top;white-space:nowrap;text-align:left;position:static;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.rt th:last-child,.rt td:last-child{border-right:0}
+.rt th{background:linear-gradient(var(--plum-bg),var(--plum-bg)),var(--panel);color:var(--plum);font-size:12.5px;position:relative;text-transform:none;letter-spacing:0}
+.rt th.mo{background:linear-gradient(110deg,var(--hd),var(--hd2) 55%,var(--hd3));color:var(--hdt);font-size:13px}
+.rt .tdel{margin-left:8px;font-weight:400;color:#e8e6df;border-color:rgba(255,255,255,.3)}
+.rt td.lbl{color:var(--mute)}.rt td.tt{font-weight:600}.rt ol{margin:0;padding-left:20px}.rt li{margin:2px 0}.rt .x{margin-left:4px;padding:0 5px}
+.rt tbody tr td,.rt tbody tr:hover td{background:none}
+.rt tbody tr:last-child td{border-bottom:0;background:linear-gradient(var(--plum-bg),var(--plum-bg)),var(--panel);font-weight:600}
+.gr{cursor:grab;touch-action:none;user-select:none;opacity:.55;margin-right:4px}.gr:hover{opacity:1}
+th.dg{opacity:.5}th.dt{box-shadow:inset 3px 0 0 var(--acc)}
+.rz{position:absolute;top:0;right:0;width:12px;height:100%;cursor:col-resize;touch-action:none;user-select:none}.rz:hover,.rz.on{background:var(--acc);opacity:.35}
+table.fx{table-layout:fixed}table.fx th,table.fx td{overflow:hidden;text-overflow:ellipsis}
+.bar{display:flex;flex-wrap:wrap;gap:4px;margin:5px 0 0;align-items:center}
+button,input,select,textarea{font:inherit;color:var(--ink)}
+.chip,.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:3px 10px;border-radius:999px;cursor:pointer;font-size:12px;white-space:nowrap;transition:background .15s,border-color .15s}
+.chip:hover,.btn:hover{background:var(--panel2);border-color:var(--mute)}
+.chip[aria-pressed=true]{background:linear-gradient(135deg,var(--acc),var(--ind));border-color:transparent;color:var(--onacc)}
+.btn.p{background:linear-gradient(135deg,var(--btn),var(--btn2));border-color:transparent;color:var(--bt)}.btn.p:hover{filter:brightness(1.1)}
+.btn:disabled{opacity:.5;cursor:default}
+.bar input[type=search]{flex:1;min-width:130px;border:1px solid var(--line);background:var(--panel);padding:3px 10px;border-radius:999px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:1px}
+.wrap{overflow-x:auto;margin-top:5px;background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh)}
+table{border-collapse:collapse;width:max-content;min-width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:3px 7px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+th{font-weight:600;color:var(--c,var(--tht));font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;background:linear-gradient(var(--cb,var(--ind-bg)),var(--cb,var(--ind-bg))),var(--panel);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+tbody tr:nth-child(even) td{background:var(--alt)}
+tbody tr:hover td{background:var(--hover)}
+tr.soon td{background:var(--soon)!important}
+tr.part td{background:linear-gradient(90deg,var(--p-o),var(--p-o2))!important;color:var(--pt);font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px}
+tr.part.t td{background:linear-gradient(90deg,var(--p-t),var(--p-t2))!important}
+tr.t td:first-child{box-shadow:inset 3px 0 0 var(--plum)}
+tr.ex td:first-child{box-shadow:inset 3px 0 0 var(--amber)}
+tr.ty-k td.sh>span{color:var(--rose)}tr.ty-m td.sh>span{color:var(--amber)}
+td.de{cursor:pointer}td.de:hover{text-decoration:underline dotted}
+td.cd,td.dc{font-weight:600;color:var(--acc)}td.cd.a{color:var(--aired)}td.cd.u{color:var(--unk)}
+td.dc.late{color:var(--bad)}td.dc.s2{color:var(--unk)}
+td.sh{font-weight:600}
+tr.rc td{background:var(--rc)!important}
+.nm{cursor:pointer}.nm:hover{text-decoration:underline}
+.ck,.wk{margin:0 7px 0 0;vertical-align:middle;accent-color:var(--acc)}
+td.none{text-align:center;color:var(--mute);padding:14px}
+th button{all:unset;cursor:pointer;font-weight:600;white-space:nowrap}th button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+th[aria-sort=ascending] button::after{content:" \25b2"}th[aria-sort=descending] button::after{content:" \25bc"}
+.ot{display:flex;flex-wrap:nowrap;align-items:center;justify-content:flex-start;gap:4px;min-width:max-content}
+.x{flex:none;border:1px solid var(--line);background:transparent;border-radius:6px;color:var(--mute);cursor:pointer;padding:0 6px;line-height:1.35;font-size:10.5px;white-space:nowrap}.x:hover{color:var(--bad);border-color:var(--bad)}
+.x.pv{color:var(--ind);border-color:var(--ind)}.x.pv:hover{background:var(--ind-bg);color:var(--ind);border-color:var(--ind)}
+.in,.ps,.ty{border:1px solid var(--line);background:var(--panel2);padding:1px 5px;border-radius:7px;font-size:12px;max-width:150px}
+.ps{border-left:4px solid var(--pc,var(--line));min-width:112px}
+.ps[data-p="Netflix"]{--pc:#b0585e}.ps[data-p="Prime Video"]{--pc:#4a7fae}.ps[data-p="JioHotstar"]{--pc:#7a67b0}.ps[data-p="Disney+"]{--pc:#3e69a6}
+.ps[data-p="SonyLIV"]{--pc:#566fa6}.ps[data-p="ZEE5"]{--pc:#7d5ea3}.ps[data-p="Apple TV+"]{--pc:#8a8f9a}.ps[data-p="HBO Max"]{--pc:#6b5ca8}
+.ps[data-p="Paramount+"]{--pc:#3f79b6}.ps[data-p="Peacock"]{--pc:#b79a4a}.ps[data-p="MGM+"]{--pc:#b3984e}.ps[data-p="Starz"]{--pc:#3b8a88}
+.ps[data-p="Lionsgate Play"]{--pc:#bd7b3c}.ps[data-p="Theatres"]{--pc:#7a5373}.ps[data-p="❓"]{--pc:#7c8190}
+.in.n{width:60px}
+a.x{text-decoration:none;display:inline-block;touch-action:manipulation}
+.x.dr{color:var(--acc);border-color:var(--acc)}
+.x.pl{padding:0 4px;margin-right:5px;border-color:transparent;font-size:11px}.x.pl:not(.dr){opacity:.8}.x.pl.dr{border-color:var(--acc)}
+.x.dl,.x.rm,.x.tdel,#del{filter:saturate(.7);font-size:10px;padding:0 5px}
+.f,.hint{color:var(--mute);font-size:11.5px}.f{margin:4px 2px 0}
+dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-top:3px solid var(--acc);border-radius:14px;width:min(520px,94vw);padding:16px;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(14,18,32,.55);backdrop-filter:blur(2px)}
+form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--mute)}
+label.w,.w{grid-column:1/-1}
+label input,label select,label textarea{border:1px solid var(--line);background:var(--panel2);padding:6px 9px;border-radius:8px;font-size:14px;max-width:none}
+label.c{flex-direction:row;align-items:center;gap:8px}
+.acts{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+h2{margin:0 0 8px;font-size:16px}
+#at,#lkt{width:100%;border:1px solid var(--line);background:var(--panel2);padding:8px;border-radius:8px;font-size:13px;resize:vertical;margin:5px 0}
+.top{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap}
+.top .clocks{flex:1 1 auto}
+.themes{display:flex;gap:3px;padding:3px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;box-shadow:var(--sh);align-items:center}
+.themes button{border:0;background:transparent;color:var(--mute);padding:4px 10px;border-radius:8px;cursor:pointer;font-weight:600;white-space:nowrap;font-size:12px}
+.themes button:hover{color:var(--ink)}
+.themes button[aria-pressed=true]{background:linear-gradient(135deg,var(--btn),var(--btn2));color:var(--bt)}
+/* ===== VIBRANT: candy colours, rounded and playful ===== */
+:root[data-theme="vibrant"] body{background:radial-gradient(circle at 10% 15%,rgba(255,61,139,.25) 0 3px,transparent 4px) 0 0/80px 80px,radial-gradient(circle at 60% 55%,rgba(23,184,255,.28) 0 3px,transparent 4px) 0 0/110px 110px,radial-gradient(circle at 85% 30%,rgba(255,196,61,.35) 0 3px,transparent 4px) 0 0/130px 130px,linear-gradient(135deg,#ffd0e8 0%,#e0d0ff 48%,#c6ebff 100%) fixed}
+:root[data-theme="vibrant"] .clocks{background:linear-gradient(100deg,#ff3d8b,#b44dff 42%,#17b8ff 78%,#12c2b5);border-radius:18px;box-shadow:0 6px 20px rgba(214,58,176,.38);font-weight:500}
+:root[data-theme="vibrant"] .clocks b{opacity:.9}
+:root[data-theme="vibrant"] .themes,:root[data-theme="vibrant"] .tabs{border:2px solid #ffb3da;border-radius:18px;background:#fff}
+:root[data-theme="vibrant"] .tabs button,:root[data-theme="vibrant"] .themes button{border-radius:14px;color:#9a4fb0}
+:root[data-theme="vibrant"] .tabs button[data-t=t1][aria-selected=true]{color:#fff;background:linear-gradient(135deg,#ff3d8b,#b44dff)}
+:root[data-theme="vibrant"] .tabs button[data-t=t2][aria-selected=true]{color:#fff;background:linear-gradient(135deg,#22c46e,#12c2b5)}
+:root[data-theme="vibrant"] .tabs button[data-t=t3][aria-selected=true]{color:#fff;background:linear-gradient(135deg,#12c2b5,#17a8ff)}
+:root[data-theme="vibrant"] .tabs button[data-t=t4][aria-selected=true]{color:#fff;background:linear-gradient(135deg,#b44dff,#ff3d8b)}
+:root[data-theme="vibrant"] #t1{--c:#ff3d8b;--c2:#b44dff}:root[data-theme="vibrant"] #t3{--c:#12c2b5;--c2:#17a8ff}
+:root[data-theme="vibrant"] #t3 h2.sec:nth-of-type(2){--c:#ff8a1f;--c2:#ffb13d}:root[data-theme="vibrant"] #t2{--c:#22c46e;--c2:#12c2b5}:root[data-theme="vibrant"] #t4{--c:#b44dff;--c2:#ff3d8b}
+:root[data-theme="vibrant"] h2.sec{width:fit-content;border-left:0;border-radius:999px;padding:3px 16px;color:#fff;background:linear-gradient(90deg,var(--c),var(--c2,var(--c)));box-shadow:0 3px 10px rgba(180,77,255,.28)}
+:root[data-theme="vibrant"] h2.sec::before{content:"✨ "}
+:root[data-theme="vibrant"] .wrap,:root[data-theme="vibrant"] .rt{border:2px solid #ffc0e0;border-radius:18px}
+:root[data-theme="vibrant"] th{background:linear-gradient(90deg,var(--c,#ff3d8b),var(--c2,#b44dff));color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.18)}
+:root[data-theme="vibrant"] .rt th{background:linear-gradient(90deg,#ff7ac6,#b58cff);color:#fff}
+:root[data-theme="vibrant"] .rt th.mo{background:linear-gradient(100deg,#ff3d8b,#b44dff 50%,#17b8ff)}
+:root[data-theme="vibrant"] tbody tr:nth-child(3n+1) td{background:rgba(255,61,139,.09)}
+:root[data-theme="vibrant"] tbody tr:nth-child(3n+2) td{background:rgba(123,77,255,.09)}
+:root[data-theme="vibrant"] tbody tr:nth-child(3n) td{background:rgba(23,184,255,.10)}
+:root[data-theme="vibrant"] tbody tr:hover td{background:rgba(255,200,61,.30)}
+:root[data-theme="vibrant"] .rt tbody tr td{background:none}
+:root[data-theme="vibrant"] .rt tbody tr:last-child td{background:linear-gradient(90deg,#ffd3ec,#e0d0ff,#cdeeff)}
+:root[data-theme="vibrant"] .chip,:root[data-theme="vibrant"] .btn{border:2px solid #ffb3da;background:#fff;color:#7a2a8c;font-weight:500}
+:root[data-theme="vibrant"] .chip:hover,:root[data-theme="vibrant"] .btn:hover{background:#fff0f8;border-color:#ff3d8b}
+:root[data-theme="vibrant"] .chip[aria-pressed=true],:root[data-theme="vibrant"] .btn.p,:root[data-theme="vibrant"] .themes button[aria-pressed=true]{background:linear-gradient(135deg,#ff3d8b,#b44dff);color:#fff;border-color:transparent;box-shadow:0 3px 10px rgba(214,58,176,.4)}
+:root[data-theme="vibrant"] .x{border:1.5px solid #ffb3da;color:#c2358f;background:#fff}
+:root[data-theme="vibrant"] .x.pv{color:#7b4dff;border-color:#c9b3ff}:root[data-theme="vibrant"] .x.dr{color:#0aa89b;border-color:#7be3da}
+:root[data-theme="vibrant"] .in,:root[data-theme="vibrant"] .ps,:root[data-theme="vibrant"] .ty{background:#fff;border-color:#ffc6e4}
+:root[data-theme="vibrant"] .bar input[type=search]{background:#fff;border:2px solid #ffb3da}
+:root[data-theme="vibrant"] dialog{border:0;border-top:6px solid #ff3d8b;border-radius:24px;box-shadow:0 18px 50px rgba(123,77,255,.35)}
+:root[data-theme="vibrant"] dialog::backdrop{background:rgba(120,40,160,.45)}
+/* ===== DARK: black and grey only ===== */
+:root[data-theme="dark"] body{background:linear-gradient(180deg,#0a0a0a,#050505) fixed}
+:root[data-theme="dark"] main,:root[data-theme="dark"] dialog{filter:grayscale(1)}
+:root[data-theme="dark"] .ps{border-left-color:#666}
+:root[data-theme="dark"] tr.rc td{background:rgba(255,255,255,.10)!important}
+:root[data-theme="dark"] th{color:#b3b3b3;background:#1b1b1b}
+:root[data-theme="dark"] h2.sec{background:linear-gradient(90deg,rgba(255,255,255,.08),transparent 70%)}
+.act{display:inline-flex;align-items:center;gap:4px}.ept{min-width:46px}
+td.te{cursor:pointer}td.te:hover{text-decoration:underline dotted}
+.sepill{font-size:11px;padding:0 7px;border-radius:999px;background:var(--ind-bg);color:var(--ind);margin-left:4px;font-weight:600}
+#toasts{inset:10px 10px auto auto;margin:0;padding:0;border:0;background:none;overflow:visible;color:inherit;width:auto;height:auto;max-width:min(380px,92vw);pointer-events:none}
+#toasts:popover-open{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.toast{pointer-events:auto;margin:0 0 6px auto;width:fit-content;max-width:100%;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:10px;padding:7px 12px;box-shadow:var(--sh);font-size:12.5px;animation:tin .18s ease-out}
+.toast.err{border-left-color:var(--bad)}.toast.info{border-left-color:var(--ind)}
+@keyframes tin{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+:root[data-theme="vibrant"] .toast{border:2px solid #ffb3da;border-left:6px solid #ff3d8b;border-radius:16px}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><div class="clocks" id="clk"></div><div class="themes" id="themes" role="group" aria-label="Colour mode"><button data-th="original" aria-pressed="true">🎨 Original</button><button data-th="vibrant" aria-pressed="false">🌈 Vibrant</button><button data-th="dark" aria-pressed="false">🌑 Dark</button></div></div>
+<nav class="tabs" role="tablist" aria-label="Pages"><button role="tab" data-t="t1" aria-selected="true">Show List</button><button role="tab" data-t="t2" aria-selected="false">Watchlist</button><button role="tab" data-t="t3" aria-selected="false">OTT list</button><button role="tab" data-t="t4" aria-selected="false">Monthly Report</button></nav>
+<div class="bar" id="gbar"><button class="btn p" id="gref">Refresh all lists</button><span id="cats" style="display:contents"></span><button class="btn" id="mlk" title="Add or change direct Letterboxd and Serializd links">Manage links</button><span class="hint" id="gst"></span></div>
+
+<div class="tab" id="t1">
+<div class="bar">
+ <button class="chip" data-f="all" aria-pressed="true">All</button>
+ <button class="chip" data-f="today" aria-pressed="false">Today</button>
+ <button class="chip" data-f="tmr" aria-pressed="false">Tomorrow</button>
+ <button class="chip" data-f="k" aria-pressed="false">K-drama ☯️</button>
+ <button class="chip" data-f="m" aria-pressed="false">Movies 🎬</button>
+ <input type="search" id="q" placeholder="Search titles" aria-label="Search titles">
+ <button class="btn" id="r1">Refresh</button><button class="btn undo" title="Nothing to undo" disabled>↩️ Undo</button>
+ <button class="btn" id="rt1">Reset table</button>
+ <button class="btn p" id="auto">Add with Claude</button>
+ <button class="btn" id="add">Add manually</button>
+</div>
+<div class="wrap"><table><thead id="h1"></thead><tbody id="b1"></tbody></table></div>
+<p class="f"><span id="f1"></span> <span id="st1"></span></p>
+</div>
+
+<div class="tab" id="t3" hidden>
+<h2 class="sec">This week <span class="hint" id="s3"></span></h2>
+<div class="bar"><button class="btn" id="r3">Refresh</button><button class="btn undo" title="Nothing to undo" disabled>↩️ Undo</button><button class="btn" id="rt3">Reset table</button><span class="hint" id="st3"></span></div>
+<div class="wrap"><table><thead id="h3"></thead><tbody id="b3"></tbody></table></div>
+
+<h2 class="sec">Next week <span class="hint" id="s4"></span></h2>
+<div class="bar"><button class="btn" id="r4">Refresh</button><button class="btn undo" title="Nothing to undo" disabled>↩️ Undo</button><button class="btn" id="rt4">Reset table</button><span class="hint" id="st4"></span></div>
+<div class="wrap"><table><thead id="h4"></thead><tbody id="b4"></tbody></table></div>
+<p class="f">Lists 3 and 4 skip anything already in list 1. Dates from US sources can differ by a day in India. Theatrical rows count down to 9:00 AM IST and show no time.</p>
+</div>
+
+<div class="tab" id="t2" hidden>
+<div class="bar">
+ <input type="search" id="wq" placeholder="Search watchlist" aria-label="Search watchlist">
+ <button class="btn" id="r2">Refresh</button><button class="btn undo" title="Nothing to undo" disabled>↩️ Undo</button>
+ <button class="btn" id="rt2">Reset table</button>
+ <button class="btn p" id="wauto">Add with Claude</button>
+ <button class="btn" id="wadd">Add manually</button>
+</div>
+<div class="wrap"><table><thead id="h2"></thead><tbody id="b2"></tbody></table></div>
+<p class="f"><span id="st2"></span> Tick ✓ on a show to move to the next episode, or on a film to remove it. Previous steps an episode back.</p>
+</div>
+<div class="tab" id="t4" hidden>
+<div class="bar"><button class="btn undo" title="Nothing to undo" disabled>↩️ Undo</button><button class="btn p" id="rauto">Add with Claude</button><button class="btn" id="radd">Add manually</button><button class="btn" id="rnext" title="Create the next month's table">Create</button><button class="btn" id="rtr">Reset table</button><span class="hint">Tick a film or show in the Show List and it lands here. Films and one-drop shows go in the month you tick them; weekly shows go in the month of their finale.</span></div>
+<div id="rpt"></div></div>
+</main>
+<div id="toasts" popover="manual" aria-live="polite"></div>
+
+<dialog id="dlg"><h2 id="dt">Title</h2>
+<form id="fm" method="dialog">
+ <label class="w">Title<input name="n" required></label>
+ <label>Type<select name="ty"><option value="s">Show</option><option value="k">K-drama ☯️</option><option value="m">Movie 🎬</option></select></label>
+ <label>Release type<select name="vn"><option value="O">OTT / digital</option><option value="T">Theatrical (9:00 AM IST)</option></select></label>
+ <label>India OTT<select name="p" id="fp"></select></label>
+ <label>Local zone (Local column)<select name="lz"><option value="America/New_York">ET</option><option value="America/Los_Angeles">PT</option><option value="Asia/Seoul">KST</option><option value="Asia/Tokyo">JST</option></select></label>
+ <label>Schedule<select name="kind"><option value="single">Single release</option><option value="weekly">Weekly</option><option value="pair">Two days a week</option><option value="list">Custom list</option></select></label>
+ <label class="c"><input type="checkbox" name="fin"> Last item is a finale / final</label>
+ <div class="w" id="g1" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+  <label>First release date (IST)<input type="date" name="start"></label>
+  <label>Release time<input type="time" name="t"></label>
+  <label>Time entered in<select name="zn"><option value="America/New_York">ET</option><option value="America/Los_Angeles">PT</option><option value="Asia/Kolkata">IST</option><option value="Asia/Seoul">KST</option><option value="Asia/Tokyo">JST</option></select></label>
+  <label id="lb">Episode label<input name="label" placeholder="Season 2"></label>
+  <label id="le2">Episodes in the season<input type="number" min="0" name="eps" placeholder="8"></label>
+  <label class="c" id="le3"><input type="checkbox" name="est"> Expected date (shows ~ until official)</label>
+  <label class="c" id="le4"><input type="checkbox" name="estm"> Month only</label>
+  <label id="lp">Prefix<input name="prefix" value="Ep "></label>
+  <label id="lc">Episodes<input type="number" min="1" name="count" value="10"></label>
+  <label id="lf">First ep number<input type="number" min="0" name="first" value="1"></label>
+  <label class="w" id="ld">Date text if unknown<input name="dl" placeholder="Early 2027"></label>
+ </div>
+ <label class="w" id="g2" style="display:none">One per line: label | YYYY-MM-DD | HH:MM (IST, optional) | f = final, a = already aired<textarea name="list" rows="6"></textarea></label>
+ <div class="w hint">Times are IST. Ticking a row moves a show to its next episode (a whole-season release steps through its episodes) and removes films and finales. Edited fields are protected from refresh.</div>
+ <div class="acts w"><button type="button" class="btn" id="del" style="margin-right:auto" title="Delete" aria-label="Delete this title">❌</button><button type="button" class="btn" id="cx">Cancel</button><button class="btn p">Save</button></div>
+</form></dialog>
+
+<dialog id="wd"><h2>Add to watchlist</h2>
+<form id="wf" method="dialog">
+ <label class="w">Title<input name="n" required></label>
+ <label>Type<select name="ty"><option value="show">Show</option><option value="film">Film</option></select></label>
+ <label>India OTT<select name="p" id="wp"></select></label>
+ <label>Season<input type="number" min="1" name="se"></label>
+ <label>Episode<input type="number" min="0" name="ep"></label>
+ <label class="w">Deadline (date)<input type="date" name="dl"></label>
+ <div class="acts w"><button type="button" class="btn" id="wcx">Cancel</button><button class="btn p">Add</button></div>
+</form></dialog>
+
+<dialog id="rd"><h2 id="rdt">Add to monthly report</h2><form id="rpf" method="dialog">
+ <label class="w">Title<input name="t" required></label>
+ <label>Type<select name="k"><option value="film">Film</option><option value="show">Show</option></select></label>
+ <label>Release year<input type="number" name="y" min="1900" max="2100" placeholder="2026"></label>
+ <label class="w">Month<input type="month" name="mo" required></label>
+ <div class="acts w"><button type="button" class="btn" id="rcx">Cancel</button><button class="btn p">Add</button></div>
+</form></dialog>
+
+<dialog id="tzd"><h2 id="tzh">Release time</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><label>Time zone<select id="tzz"><option value="America/New_York">ET</option><option value="America/Los_Angeles">PT</option><option value="Asia/Kolkata">IST</option><option value="Asia/Seoul">KST</option><option value="Asia/Tokyo">JST</option></select></label><label>Time<input id="tzt" type="time"></label></div>
+<p class="hint" id="tzp" role="status"></p><div class="acts"><button class="btn" id="tzr" style="margin-right:auto">Clear manual time</button><button class="btn" id="tzx">Cancel</button><button class="btn p" id="tzs">Save</button></div></dialog>
+
+<dialog id="dtd"><h2 id="dth">Release date</h2><label class="w" style="display:flex;flex-direction:column;gap:3px">Date<input id="dtu" placeholder="10 OCT 26" autocomplete="off" style="width:100%;border:1px solid var(--line);background:var(--panel2);padding:7px 9px;border-radius:8px;font-size:14px"></label><p class="hint" id="dtn" role="status"></p><div class="acts"><button class="btn" id="dtr" style="margin-right:auto">Use scheduled date</button><button class="btn" id="dtx">Cancel</button><button class="btn p" id="dts">Save</button></div></dialog>
+
+<dialog id="led"><h2 id="leh">Edit link</h2><label class="w" style="display:flex;flex-direction:column;gap:3px">Link<input id="leu" type="url" style="width:100%;border:1px solid var(--line);background:var(--panel2);padding:7px 9px;border-radius:8px;font-size:14px"></label><p class="hint" id="len" role="status"></p><div class="acts"><button class="btn" id="ler" style="margin-right:auto">Use automatic link</button><button class="btn" id="lex">Cancel</button><button class="btn p" id="les">Save</button></div></dialog>
+
+<dialog id="lkd"><h2>Direct links</h2><p class="hint">One per line: Title - link. Films take a Letterboxd film link. Shows take any Serializd link for that show (an episode, a season or the show page); the page then builds the right episode or season link by itself.</p><textarea id="lkt" rows="7" aria-label="Titles and links" placeholder="Buddy - https://letterboxd.com/film/buddy-2026/&#10;VisionQuest - https://www.serializd.com/show/213375/season/314452/1/episode/2"></textarea><p class="hint" id="lks" role="status"></p><div class="acts"><button class="btn" id="lkc">Close</button><button class="btn p" id="lkb">Save links</button></div></dialog>
+
+<dialog id="cf"><h2 id="cft">Are you sure?</h2><p class="hint" id="cm"></p><div class="acts"><button class="btn" id="cn">Cancel</button><button class="btn p" id="cy">Yes</button></div></dialog>
+
+<div id="renpop" style="display:none;position:fixed;z-index:1200;top:60px;right:14px;background:var(--panel);border:1px solid var(--acc);border-radius:12px;box-shadow:var(--sh);padding:8px 10px;min-width:220px;max-width:320px"><div style="font-size:12px;color:var(--mute);margin-bottom:4px" id="renlab"></div><input id="reninp" style="width:100%;border:1px solid var(--line);background:var(--panel2);padding:5px 8px;border-radius:7px;font-size:13px"><div style="display:flex;gap:6px;margin-top:6px;justify-content:flex-end"><button class="btn" id="renx" style="font-size:12px;padding:2px 9px">Cancel</button><button class="btn p" id="rens" style="font-size:12px;padding:2px 9px">Rename</button></div></div>
+<dialog id="au"><h2 id="ah">Add with Claude</h2><p class="hint" id="ahi"></p><textarea id="at" rows="6" aria-label="Titles or schedule text"></textarea><p class="hint" id="as" role="status"></p><div class="acts"><button class="btn" id="ac">Close</button><button class="btn p" id="ar">Add titles</button></div></dialog>
+
+<script>
+const $=id=>document.getElementById(id),DAY=864e5;
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+var UNDO=[],UNLAST=null,UNT=0,UNRESTORE=false,LASTTOAST='';
+const TRACK=new Set(['q-shows-v2','q-watch-v2','q-report-v1','q-report-months-v1','q-ptr-v1','q-epc-v1','q-ott-v1','q-links-v1','q-watchlinks-v1','q-removed-v1','q-hid-v1','q-pool-v1']);
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}if(k==='q-lbl-v1')LBLS=v;if(TRACK.has(k))touch()};
+const uid=()=>Math.random().toString(36).slice(2,9);
+const D=(d,t)=>new Date(`${d}T${t}:00+05:30`);
+const add=(d,n)=>{const x=new Date(d+'T00:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)};
+const mon=d=>{const x=new Date(d+'T00:00:00Z');return add(d,-((x.getUTCDay()+6)%7))};
+const E=(l,d,t,o={})=>({l,d,t:d&&t?D(d,t):null,k:!!(d&&t),...o});
+const S=(n,ty,vn,p,start,t,label,o={})=>({n,ty,vn,p,loc:o.loc||'❓',tz:o.tz||'',kind:'single',label,start,t,fin:o.fin===0?0:1,dl:o.dl||'',sk:o.sk||''});
+const U=(n,ty,vn,label,p)=>S(n,ty,vn,p||'❓','','',label);
+const T9=(n,d,label)=>S(n,'m','T','Theatres',d,'09:00',label||'Theatrical');
+const L=(a,t)=>a.map(x=>({l:x[0],d:x[1],t:x[2]===undefined?t:x[2],f:!!x[3]}));
+const PLAT=['☠️☠️☠️','❓','Netflix','Prime Video','JioHotstar','SonyLIV','ZEE5','Apple TV+','Disney+','HBO Max','Paramount+','Peacock','MGM+','Starz','Lionsgate Play','Sun NXT','Aha','Manorama MAX','Hoichoi','MX Player','YouTube','Crunchyroll','Mubi','Discovery+','Eros Now','Theatres'];
+/* ---------- DATA (times IST; blank = not known yet) ---------- */
+const SP=['2026-09-17','2026-10-01','2026-10-15','2026-10-29','2026-11-12','2026-11-26'].map((d,i)=>({l:'S29 Ep '+(i+1),d,t:'10:00',f:i==5}));
+const DEF=[
+S('Love of Your Life','m','O','Prime Video','2026-10-14','12:30','Digital release',{loc:'3:00 AM EDT'}),
+{n:'Merry Berry Love',ty:'k',vn:'O',p:'Disney+',loc:'10:00 PM JST (NTV)',kind:'weekly',prefix:'Ep ',first:1,count:10,start:'2026-10-07',t:'20:00',fin:1},
+{n:'VisionQuest',vn:'O',p:'JioHotstar',loc:'❓',tz:'America/New_York',kind:'list',list:L([['Ep 1–2','2026-10-14'],['Ep 3–4','2026-10-21'],['Ep 5–6','2026-10-28'],['Ep 7','2026-11-04'],['Ep 8','2026-11-11',undefined,1]],'06:30')},
+{n:'South Park',vn:'O',p:'❓',loc:'10:00 PM ET (Wed, prev. day)',kind:'list',list:SP},
+T9('Jailer 2','2026-10-15'),
+{n:'MobLand',vn:'O',p:'JioHotstar',loc:'3:00 AM ET (Fri)',kind:'weekly',prefix:'S2 Ep ',first:4,count:7,start:'2026-10-08',t:'18:00',fin:1},
+S('Crystal Lake','s','O','❓','2026-10-15','','S1 · all 8 eps'),
+{n:"Georgie & Mandy's First Marriage",vn:'O',p:'❓',loc:'8:00 PM ET (Thu)',kind:'weekly',prefix:'S3 Ep ',first:1,count:4,start:'2026-10-09',t:'08:30'},
+{n:'Avatar: Seven Havens',vn:'O',p:'❓',loc:'❓',kind:'list',list:L([['Ep 1–3','2026-10-09'],['Ep 4–6','2026-10-16'],['Ep 7–9','2026-10-23'],['Ep 10–13','2026-10-30',undefined,1]],'13:00')},
+{n:'Doctor X: Mafia in White',ty:'k',vn:'O',p:'Netflix',loc:'9:50 PM KST',kind:'pair',prefix:'Ep ',first:1,count:12,start:'2026-10-09',t:'20:30',fin:1},
+S('Tulsa King','s','O','JioHotstar','2026-10-16','','S4 Ep 1',{fin:0}),
+{n:'The Rainmaker',vn:'O',p:'❓',loc:'❓',kind:'weekly',prefix:'S2 Ep ',first:1,count:4,start:'2026-10-16',t:''},
+{n:'100 Days of Deception',ty:'k',vn:'O',p:'Netflix',loc:'9:10 PM KST',kind:'pair',prefix:'Ep ',first:1,count:16,start:'2026-10-10',t:'17:40',fin:1},
+{n:'A Love Other Than Yours',ty:'k',vn:'O',p:'Prime Video',loc:'11:00 AM ET',kind:'pair',prefix:'Ep ',first:7,count:8,start:'2026-10-10',t:'20:30',fin:1},
+{n:'Marshals',vn:'O',p:'❓',loc:'8:00 PM ET (Sun)',kind:'list',list:L([['S2 Ep 1','2026-10-05','06:00'],['S2 Ep 2','2026-10-12','05:30'],['S2 Ep 3','2026-10-19','05:30'],['S2 Ep 4','2026-10-26','05:30']])},
+{n:'Animal Control',vn:'O',p:'❓',loc:'8:30 PM ET (Sun)',kind:'list',list:L([['S5 Ep 2','2026-10-05'],['S5 Ep 3','2026-10-19'],['S5 Ep 4','2026-10-26']],'12:00')},
+{n:'Love in Disguise',ty:'k',vn:'O',p:'Prime Video',loc:'8:50 PM KST',kind:'pair',prefix:'Ep ',first:1,count:4,start:'2026-10-19',t:'17:20'},
+S('The Terminal List','s','O','Prime Video','2026-10-21','','S2 · all 8 eps'),
+T9('Clayface','2026-10-23'),
+S('Lupin','s','O','Netflix','2026-10-23','','Part 4 · all 8 eps'),
+S('The Institute','s','O','MGM+','2026-11-08','','Season 2'),
+S('The Lord of the Rings: The Rings of Power','s','O','Prime Video','2026-11-11','','Season 3'),
+S('Percy Jackson and the Olympians','s','O','Disney+','2026-11-20','','Season 3'),
+S('Only Murders in the Building','s','O','Disney+','2026-12-08','','Season 6'),
+S('Emily in Paris','s','O','Netflix','2026-12-24','','Season 6'),
+S('Ahsoka','s','O','Disney+','2027-01-20','','Season 2'),
+S('Sweetpea','s','O','Starz','2027-02-15','','Season 2',{est:1,estm:1}),
+S('Family Guy','s','O','❓','2027-02-15','','Season 25',{est:1,estm:1}),
+S('Dutton Ranch','s','O','Paramount+','2027-11-15','','Season 2',{est:1,estm:1})
+];
+const NEWD=[
+S('The Gilded Age','s','O','JioHotstar','2026-11-02','07:30','S4 Ep 1',{fin:0,tz:'America/New_York'}),
+S('Dead-End Job','k','O','Netflix','2026-10-30','','Season 1'),
+S('The Remarried Empress','k','O','Disney+','2026-11-04','','Season 1'),
+S('Blade Runner 2099','s','O','Prime Video','2026-11-25','','Limited series · 8 eps'),
+S("Harry Potter and the Philosopher's Stone (HBO series)",'s','O','JioHotstar','2026-12-25','','S1 Ep 1',{fin:0}),
+U('Phony (2026)','s','O','❓'),S('Black Doves','s','O','Netflix','2026-11-05','','S2 · all 6 eps'),U('The Body (2026)','s','O','❓'),U('The Good Daughter','s','O','❓'),U('12 12 12','m','O','❓'),
+S('Pride and Prejudice','s','O','Netflix','2026-12-03','','Limited series · 6 eps'),S('Ted: The Animated Series','s','O','❓','2026-12-17','','S1 · 8 eps',{fin:0}),
+S('Buddy movie','m','O','❓','2026-10-13','','Digital · US VOD'),S('Hope','m','O','❓','2026-10-13','','Digital · US VOD'),S('Primetime','m','O','❓','2026-11-03','','Digital · US VOD'),S('Possible Love (2026)','m','O','Netflix','2026-11-06','','Digital'),
+S('The Odyssey','m','O','❓','2026-11-17','','Digital · US VOD'),S('Bola Negra','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),S('The Adventures of Cliff Booth','m','O','Netflix','2026-12-15','','Netflix film',{est:1,estm:1}),U('Ray Gunn','m','O','Digital'),
+S('Sense and Sensibility','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),S('Street Fighter','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),S('Wildwood (2026)','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),S('Wicker (2026)','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),
+S('Klara and the Sun (2026)','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),S('How to Rob a Bank','m','O','❓','2026-12-15','','Digital',{est:1,estm:1}),S('Hexed (2026)','m','O','❓','2027-01-15','','Digital',{est:1,estm:1}),S('Focker-In-Law','m','O','❓','2027-01-15','','Digital',{est:1,estm:1}),
+S('Violent Night 2 (2026)','m','O','❓','2027-01-15','','Digital',{est:1,estm:1}),S('Mookuthi Amman 2','m','O','JioHotstar','2026-12-15','','Digital',{est:1,estm:1}),
+T9('Whalefall','2026-10-16'),T9('Godzilla Minus Zero','2026-11-06'),T9('Ramayana: Part 1','2026-11-06'),T9('The Hunger Games: Sunrise on the Reaping','2026-11-20'),
+T9('Avengers: Doomsday','2026-12-18'),T9('Dune: Part Three','2026-12-18'),T9('The Angry Birds Movie 3','2026-12-23'),T9('Jumanji: Open World','2026-12-25'),T9('Werwulf (2026)','2026-12-25'),
+T9('Mr. Irrelevant: The John Tuggle Story','2026-12-25'),T9('Artificial','2026-12-25'),T9('Scene movie','',''),T9('ENE Repeat','','')
+];
+/* Snapshot of data collected on 14 Oct 2026 from whentostream.com (US dates), Variety, TV Insider, JioHotstar/WBD and Indian OTT roundups.
+   Refresh applies it without overwriting anything you edited by hand. */
+const SNAP={v:20261016,asOf:'16 Oct 2026',
+ q:{
+  'dutton ranch':{start:'2027-11-15',est:1,estm:1,p:'Paramount+'},'sweetpea':{start:'2027-02-15',est:1,estm:1,dl:''},'family guy':{start:'2027-02-15',est:1,estm:1,dl:''},
+  'black doves':{start:'2026-11-05',label:'S2 · all 6 eps',p:'Netflix'},'pride and prejudice':{start:'2026-12-03',label:'Limited series · 6 eps',p:'Netflix'},
+  'ted: the animated series':{start:'2026-12-17',label:'S1 · 8 eps'},'possible love (2026)':{start:'2026-11-06',p:'Netflix'},
+  'bola negra':{start:'2026-12-15',est:1,estm:1},
+  'the adventures of cliff booth':{start:'2026-12-15',est:1,estm:1},
+  'sense and sensibility':{start:'2026-12-15',est:1,estm:1},
+  'street fighter':{start:'2026-12-15',est:1,estm:1},
+  'wildwood (2026)':{start:'2026-12-15',est:1,estm:1},
+  'wicker (2026)':{start:'2026-12-15',est:1,estm:1},
+  'klara and the sun (2026)':{start:'2026-12-15',est:1,estm:1},
+  'how to rob a bank':{start:'2026-12-15',est:1,estm:1},
+  'hexed (2026)':{start:'2027-01-15',est:1,estm:1},
+  'focker-in-law':{start:'2027-01-15',est:1,estm:1},
+  'violent night 2 (2026)':{start:'2027-01-15',est:1,estm:1},
+  'mookuthi amman 2':{start:'2026-12-15',est:1,estm:1,p:'JioHotstar'},
+  'south park':{list:SP,loc:'10:00 PM ET (Wed, prev. day)'},'artificial':{start:'2026-12-25',t:'09:00'},
+  'irrelevant':{n:'Mr. Irrelevant: The John Tuggle Story',start:'2026-12-25',t:'09:00'},
+  'buddy movie':{start:'2026-10-13',label:'Digital · US VOD'},'hope':{start:'2026-10-13',label:'Digital · US VOD'},
+  'primetime':{start:'2026-11-03',label:'Digital · US VOD'},'the odyssey':{start:'2026-11-17',label:'Digital · US VOD'},
+  'hsexd':{n:'Hexed (2026)'},'whalefall':{start:'2026-10-16',t:'09:00'},'godzilla minus zero':{start:'2026-11-06',t:'09:00'},
+  'avengers: doomsday':{start:'2026-12-18',t:'09:00'},'dune: part three':{start:'2026-12-18',t:'09:00'},
+  'the angry birds movie 3':{start:'2026-12-23',t:'09:00'},'jumanji: open world':{start:'2026-12-25',t:'09:00'},
+  'werwulf (2026)':{start:'2026-12-25',t:'09:00'},'the hunger games: sunrise on the reaping':{start:'2026-11-20',t:'09:00'}},
+ add:[S('Yellowjackets','s','O','❓','2026-11-20','','S4 Ep 1',{fin:0})],
+ w:{'the gilded age':'JioHotstar'}};
+/* extra notable releases for lists 3 and 4: [title,type,venue,label,date,time,local,India OTT] */
+const POOL0=[
+['Koffee With Karan S9','s','O','Season 9','2026-10-14','','❓','JioHotstar'],['Love Is Blind S11','s','O','Season 11','2026-10-14','','❓','Netflix'],
+['Helluva Boss S3','s','O','Season 3','2026-10-14','','❓','Prime Video'],['The Diplomat S4','s','O','Season 4','2026-10-15','','❓','Netflix'],
+['The Traitors (Telugu)','s','O','Season 1','2026-10-15','','❓','Prime Video'],['Kappi Squad','s','O','Season 1','2026-10-15','','❓','JioHotstar'],
+['Hollywood Arts','s','O','Season 1','2026-10-15','','❓','Netflix'],['Roadies Rebirth','s','O','Season 21','2026-10-16','','❓','Netflix'],
+["Grey's Anatomy S23",'s','O','Season 23','2026-10-16','','❓','JioHotstar'],['Aasha','m','O','Film','2026-10-16','','❓','ZEE5'],
+['Masterplan','m','O','Film','2026-10-16','','❓','Prime Video'],['Sacrifice','m','O','Film','2026-10-16','','❓','Netflix'],['DC','m','O','Film','2026-10-16','','❓','SonyLIV'],
+['Dracula (Luc Besson)','m','O','Streaming','2026-10-12','','❓','❓'],['The Death of Robin Hood','m','O','Digital · US VOD','2026-10-16','','❓','❓'],['Tenzing','m','O','Digital · US VOD','2026-10-16','','❓','❓'],
+['Om: Chapter 1','m','T','Theatrical','2026-10-16','09:00','❓','Theatres'],['Vishwambhara','m','T','Theatrical','2026-10-16','09:00','❓','Theatres'],
+['Ranabaali','m','T','Theatrical','2026-10-16','09:00','❓','Theatres'],['Prahaar: The Untold Story of Ujjwal Nikam','m','T','Theatrical','2026-10-16','09:00','❓','Theatres'],
+['Nayyi Navelli','m','T','Theatrical','2026-10-16','09:00','❓','Theatres'],['Crawlers','m','T','Theatrical · US','2026-10-16','09:00','❓','Theatres'],
+['Once Upon a Time in Harlem','m','T','Theatrical · US','2026-10-16','09:00','❓','Theatres'],
+['Moana (live-action)','m','O','Streaming · US','2026-10-21','','❓','❓'],
+['Udta Teer','m','T','Theatrical','2026-10-23','09:00','❓','Theatres'],['Main Na Raha Mera','m','T','Theatrical','2026-10-23','09:00','❓','Theatres'],
+['Fatherland','m','T','Theatrical · US','2026-10-23','09:00','❓','Theatres'],['A Talent for Murder','m','T','Theatrical · US','2026-10-23','09:00','❓','Theatres'],
+['Ali G: Who Iz I','m','T','Theatrical · US','2026-10-23','09:00','❓','Theatres']
+].map(a=>({n:a[0],ty:a[1],vn:a[2],l:a[3],d:a[4],t:a[5],loc:a[6],p:a[7]}));
+/* watchlist: [title, type, India OTT] — every film listed separately */
+const FR=(names,p)=>names.map(n=>[n,'film',p]);
+const XMEN=['X-Men (2000)','X2: X-Men United (2003)','X-Men: The Last Stand (2006)','X-Men Origins: Wolverine (2009)','X-Men: First Class (2011)','The Wolverine (2013)','X-Men: Days of Future Past (2014)','Deadpool (2016)','X-Men: Apocalypse (2016)','Logan (2017)','Deadpool 2 (2018)','Dark Phoenix (2019)','The New Mutants (2020)','Deadpool & Wolverine (2024)'];
+const MCU=['Iron Man (2008)','The Incredible Hulk (2008)','Iron Man 2 (2010)','Thor (2011)','Captain America: The First Avenger (2011)','The Avengers (2012)','Iron Man 3 (2013)','Thor: The Dark World (2013)','Captain America: The Winter Soldier (2014)','Guardians of the Galaxy (2014)','Avengers: Age of Ultron (2015)','Ant-Man (2015)','Captain America: Civil War (2016)','Doctor Strange (2016)','Guardians of the Galaxy Vol. 2 (2017)','Spider-Man: Homecoming (2017)','Thor: Ragnarok (2017)','Black Panther (2018)','Avengers: Infinity War (2018)','Ant-Man and the Wasp (2018)','Captain Marvel (2019)','Avengers: Endgame (2019)','Spider-Man: Far From Home (2019)','Black Widow (2021)','Shang-Chi and the Legend of the Ten Rings (2021)','Eternals (2021)','Spider-Man: No Way Home (2021)','Doctor Strange in the Multiverse of Madness (2022)','Thor: Love and Thunder (2022)','Black Panther: Wakanda Forever (2022)','Ant-Man and the Wasp: Quantumania (2023)','Guardians of the Galaxy Vol. 3 (2023)','The Marvels (2023)','Captain America: Brave New World (2025)','Thunderbolts* (2025)','The Fantastic Four: First Steps (2025)','Spider-Man: Brand New Day (2026)','Avengers: Doomsday (2026)'];
+const W0=[['The Gilded Age','show','JioHotstar'],['Victorious','show','❓'],['Teen Titans Go!','show','❓'],
+['Colony (2026)','film','❓'],['Fall 2: Deadpoint (2026)','film','❓'],['Tony','film','❓'],['Buddy (2026)','film','❓'],['Hope (2026)','film','❓'],
+...FR(['Blade Runner (1982)','Blade Runner 2049 (2017)'],'❓'),
+...FR(["Harry Potter and the Philosopher's Stone (2001)",'Harry Potter and the Chamber of Secrets (2002)','Harry Potter and the Prisoner of Azkaban (2004)','Harry Potter and the Goblet of Fire (2005)','Harry Potter and the Order of the Phoenix (2007)','Harry Potter and the Half-Blood Prince (2009)','Harry Potter and the Deathly Hallows: Part 1 (2010)','Harry Potter and the Deathly Hallows: Part 2 (2011)'],'JioHotstar'),
+...FR(['Practical Magic (1998)','Practical Magic 2 (2026)'],'❓'),
+...FR(['The Hunger Games (2012)','The Hunger Games: Catching Fire (2013)','The Hunger Games: Mockingjay – Part 1 (2014)','The Hunger Games: Mockingjay – Part 2 (2015)','The Hunger Games: The Ballad of Songbirds & Snakes (2023)','The Hunger Games: Sunrise on the Reaping (2026)'],'❓'),
+...FR(['The Angry Birds Movie (2016)','The Angry Birds Movie 2 (2019)','The Angry Birds Movie 3 (2026)'],'❓'),
+['Jumanji (1995)','film','Netflix'],...FR(['Jumanji: Welcome to the Jungle (2017)','Jumanji: The Next Level (2019)','Jumanji: Open World (2026)'],'❓'),
+...FR(['Dune (2021)','Dune: Part Two (2024)','Dune: Part Three (2026)'],'❓'),
+...FR(XMEN,'JioHotstar'),
+...FR(MCU,'JioHotstar')];
+/* ---------- STORE ---------- */
+const RM0=['grimm sisters & lanterns','four hands, two sonatas','coven academy'];
+const rmGet=()=>{const r=ld('q-removed-v1');return Array.isArray(r)?r:RM0.slice()};
+const rmSet=a=>sv('q-removed-v1',a);
+let shows=ld('q-shows-v2'),fresh=false;
+if(!Array.isArray(shows)){shows=ld('q-shows-v1');if(!Array.isArray(shows)||!shows.length){shows=[];fresh=true}}
+{const have=new Set(shows.map(s=>s.n.toLowerCase())),gone=rmGet();
+ [...(fresh?DEF:[]),...NEWD].forEach(d=>{const k=d.n.toLowerCase();if(!have.has(k)&&!gone.includes(k)){have.add(k);shows.push({id:uid(),...JSON.parse(JSON.stringify(d))})}});
+ shows.forEach(s=>{if(!s.vn){const d=[...DEF,...NEWD].find(x=>x.n.toLowerCase()===s.n.toLowerCase());s.vn=d?d.vn:(s.ty==='m'?'T':'O');if(s.vn==='T'&&s.kind==='single')s.t='09:00'}})}
+let watch=ld('q-watch-v2');
+if(!Array.isArray(watch)){const old=ld('q-watch-v1');watch=W0.map(a=>({id:uid(),n:a[0],ty:a[1],se:'',ep:'',p:a[2],dl:''}));
+  if(Array.isArray(old))old.forEach(o=>{if(!watch.some(w=>w.n.toLowerCase()===String(o.n).toLowerCase())&&!/\(all|1 & 2|since 2000/i.test(o.n))watch.push({id:uid(),n:o.n,ty:'show',se:'',ep:'',p:'❓',dl:''})})}
+let LBLS=ld('q-lbl-v1')||{},TOV=ld('q-tov-v1')||{},TK=ld('q-ticks-v1')||{},OFS=ld('q-ofs-v1')||{},pool=ld('q-pool-v1')||[],ovr=ld('q-ott-v1')||{},HID=ld('q-hid-v1')||{};
+const save=()=>sv('q-shows-v2',shows),saveW=()=>sv('q-watch-v2',watch);
+let flt='all',qs='',wqs='',cur=null,NOW=new Date(),TODAY='',last={},cfYes=null,amode='q';
+const SORT={q:{c:3,d:1},w:{c:-1,d:1}};
+/* ---------- SNAPSHOT (non-destructive refresh) ---------- */
+const emptyV=v=>v===undefined||v===null||v===''||v==='❓'||(Array.isArray(v)&&!v.length);
+function applySnap(){
+  let n=0;const gone=rmGet(),have=new Set(shows.map(s=>s.n.toLowerCase()));
+  shows.forEach(s=>{const p=SNAP.q[s.n.toLowerCase()];if(!p)return;s.lk=s.lk||[];
+    for(const f in p){if(s.lk.includes(f))continue;
+      if((emptyV(s[f])||(s.sv||0)<SNAP.v)&&JSON.stringify(s[f])!==JSON.stringify(p[f])){s[f]=p[f];n++}}
+    s.sv=SNAP.v});
+  SNAP.add.forEach(d=>{const k=d.n.toLowerCase();if(!have.has(k)&&!gone.includes(k)){shows.push({id:uid(),sv:SNAP.v,...JSON.parse(JSON.stringify(d))});n++}});
+  save();return n}
+function applySnapW(){
+  let n=0;watch.forEach(w=>{const p=SNAP.w[w.n.toLowerCase()];if(p&&emptyV(w.p)&&!w.pl){w.p=p;n++}});saveW();return n}
+/* ---------- RULES ---------- */
+const bgN=s=>{if(s.kind!=='single'||s.ty==='m')return 0;return +s.eps||+(String(s.label||'').match(/(\d+)\s*eps?\b/i)||[])[1]||0};   // episodes in a whole-season drop
+function expand(s){
+  let a;const T=s.t||((s.ty==='m'&&s.vn==='O')?'12:30':''),V=s.dov||{};
+  if(s.kind==='list')a=(s.list||[]).map(x=>E(x.l,V[x.l]||x.d||null,x.t||'',{f:!!x.f,a:!!x.a}));
+  else if(s.kind==='single'){const lab=s.label||'Release',d=V[lab]||s.start||null,n=bgN(s);
+    if(n>=2){const sn=(lab.match(/\bS(\d+)\b/i)||lab.match(/Season\s*(\d+)/i)||lab.match(/Part\s*(\d+)/i)||[])[1]||1;a=Array.from({length:n},(_,i)=>E('S'+sn+' Ep '+(i+1),d,T,{bg:1,f:i===n-1}))}
+    else a=[E(lab,d,T,{dl:s.dl,sk:s.sk,est:!!s.est&&!V[lab],estm:!!s.estm})]}
+  else{const n=Math.max(1,+s.count||1),f=+s.first||0,p=s.prefix==null?'Ep ':s.prefix;
+    a=Array.from({length:n},(_,i)=>{const lab=p+(f+i);return E(lab,V[lab]||(s.start?add(s.start,s.kind==='pair'?7*Math.floor(i/2)+i%2:7*i):null),T)});}
+  if(s.z&&s.zt)a.forEach(e=>zoneApply(e,s));
+  if(s.fin&&a.length)a[a.length-1].f=true;
+  return a;
+}
+const istDay=d=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata'}).format(d);
+const dd=(a,b)=>Math.round((new Date(a+'T00:00:00Z')-new Date(b+'T00:00:00Z'))/DAY);
+/* ---------- time zones: ET / PT / IST / KST / JST ---------- */
+const ZN={IST:'Asia/Kolkata',ET:'America/New_York',PT:'America/Los_Angeles',KST:'Asia/Seoul',JST:'Asia/Tokyo'};
+const ZAB={'Asia/Kolkata':'IST','America/New_York':'ET','America/Los_Angeles':'PT','Asia/Seoul':'KST','Asia/Tokyo':'JST'};
+const zoff=(u,z)=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:z,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(u)),g=k=>+p.find(x=>x.type===k).value;return Date.UTC(g('year'),g('month')-1,g('day'),g('hour'),g('minute'),g('second'))-u};
+function zoned(d,t,z){const[y,m,da]=d.split('-').map(Number),[hh,mi]=t.split(':').map(Number),w=Date.UTC(y,m-1,da,hh,mi);let u=w;for(let i=0;i<3;i++)u=w-zoff(u,z);return new Date(u)}   // a clock time in a zone -> the real moment
+const localDate=(t,z)=>new Intl.DateTimeFormat('en-CA',{timeZone:z}).format(t);
+const fmtZ=(t,z)=>new Intl.DateTimeFormat('en-US',{timeZone:z,hour:'numeric',minute:'2-digit'}).format(t)+' '+(ZAB[z]||'');
+const hhmm=(t,z)=>new Intl.DateTimeFormat('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(t);
+function zoneOf(s){                                               // the zone shown in the Local column
+  if(s.z&&s.z!==ZN.IST)return s.z;if(s.lz)return s.lz;if(s.tz)return s.tz;
+  const m=String(s.loc||'').match(/\b(KST|JST|PDT|PST|PT|EDT|EST|ET)\b/);
+  if(m){const k=m[1];return k==='KST'?ZN.KST:k==='JST'?ZN.JST:k[0]==='P'?ZN.PT:ZN.ET}
+  return ZN.ET}                                                    // Indian titles and anything else: ET
+const dayArrow=(t,z)=>{const n=dd(istDay(t),localDate(t,z));return n===1?' 👈':n===-1?' 👉':''};   // 👈 India is a day later, 👉 a day earlier
+const localCell=(s,e)=>e.k?fmtZ(e.t,zoneOf(s))+dayArrow(e.t,zoneOf(s)):'❓';
+function zoneApply(e,s){                                          // time set in a zone -> IST moment, date and countdown
+  if(!s.z||!s.zt||!e.d||e.est)return e;e.od=e.d;let b=null;
+  for(const k of[0,-1,1]){const L=add(e.d,k),I=zoned(L,s.zt,s.z),dist=Math.abs(dd(istDay(I),e.d));if(!b||dist<b.dist)b={I,L,dist}}
+  e.t=b.I;e.d=istDay(b.I);e.k=true;e.ld=b.L;return e}
+function retime(e,z,t){const I0=e.k?e.t:D(e.d,'12:00'),B=localDate(I0,z);let b=null;   // pick the local date whose moment is closest to the current one, so the day does not jump
+  for(const k of(z===ZN.IST?[0]:[0,-1,1])){const L=add(B,k),I=zoned(L,t,z),dist=Math.abs(I-I0);if(!b||dist<b.dist)b={I,L,dist}}return{I1:b.I,d1:istDay(b.I),L0:b.L}}
+function shiftDates(s,k){const sh=d=>d?add(d,k):d;s.start=sh(s.start);if(s.list)s.list=s.list.map(x=>({...x,d:sh(x.d)}));if(s.dov){const v={};for(const l in s.dov)v[l]=sh(s.dov[l]);s.dov=v}}
+const rel=(e,now,today)=>e.est?false:e.k?e.t<=now:!!(e.a||(e.d&&e.d<today));
+const tk=(s,e)=>!!TK[s.id+'|'+e.l];
+const isWk=s=>s.ty!=='m'&&(s.kind!=='single'||bgN(s)>=2);            // weekly, two-a-week and custom episode lists
+let PTR=ld('q-ptr-v1')||{},EPC=ld('q-epc-v1')||{};
+const randCol=()=>'hsla('+Math.floor(Math.random()*360)+',46%,54%,.30)';                                   // which episode each weekly show is on
+function ptrOf(s,eps){let p=PTR[s.id];
+  if(p===undefined){let r=-1;eps.forEach((x,i)=>{if(rel(x,NOW,TODAY))r=i});p=(eps[0]&&eps[0].bg)?0:Math.max(0,r);PTR[s.id]=p;sv('q-ptr-v1',PTR)}   // starts at the latest released episode
+  return Math.min(Math.max(0,p),eps.length-1)}
+function rowsFor(s){
+  const eps=expand(s);if(!eps.length)return[];
+  if(!isWk(s))return[eps[0]];
+  const i=ptrOf(s,eps),out=[eps[i]];
+  if(eps[i].bg)return out;
+  if(eps[i].d){const w=mon(eps[i].d);for(let j=i+1;j<eps.length;j++){if(eps[j].d&&mon(eps[j].d)===w)out.push(eps[j]);else break}}   // later episodes out the same week
+  return out;
+}
+const sk=e=>e.k?+e.t:e.d?+D(e.d,e.a?'00:00':'23:59'):e.sk?+D(e.sk,'23:59'):Infinity;
+const cdf=ms=>{const s=Math.floor(ms/1e3),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return'⏳ '+(d?d+'d ':'')+((d||h)?h+'h ':'')+m+'m '+String(s%60).padStart(2,'0')+'s'};
+const WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const fd=d=>{const x=new Date(d+'T00:00:00Z');return`${WD[x.getUTCDay()]} ${x.getUTCDate()} ${MO[x.getUTCMonth()]}${d.slice(0,4)==='2026'?'':' '+d.slice(0,4)}`};
+const MON3=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+const fdd=d=>String(+d.slice(8,10)).padStart(2,'0')+' '+MO[+d.slice(5,7)-1].toUpperCase()+(d.slice(0,4)===istDay(new Date()).slice(0,4)?'':' '+d.slice(2,4));
+function dl(e,today){if(!e.d)return e.dl||'❓';
+  if(e.est)return'~'+(e.estm?MON3[+e.d.slice(5,7)-1]+(e.d.slice(0,4)===istDay(new Date()).slice(0,4)?'':' '+e.d.slice(2,4)):fdd(e.d));const n=dd(e.d,today);return n===0?'Today':n===1?'Tomorrow':fdd(e.d)}
+const tm=e=>e.k?new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'}).format(e.t):'❓';
+const lc=(t,tz)=>new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'short',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(t).replace(',','');
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s).toLowerCase().replace(/\(.*?\)/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+/* ---------- DIRECT LINKS (Letterboxd films, Serializd shows) ---------- */
+const LBX=q=>'https://letterboxd.com/search/films/'+encodeURIComponent(q)+'/';
+const SRZ=q=>'https://www.serializd.com/search?searchQuery='+encodeURIComponent(q);
+const LNK0={buddy:{lb:'https://letterboxd.com/film/buddy-2026/'},visionquest:{sz:{id:'213375',seasons:{'1':'314452'}}}};
+let LK={...LNK0,...(ld('q-links-v1')||{})};
+const nk=s=>norm(s).replace(/\b(movie|film)\b/g,'').replace(/ /g,'');
+{const k=nk("Georgie & Mandy's First Marriage");if(!LK[k])LK[k]={sz:{id:'243875',slug:"Georgie-%26-Mandy's-First-Marriage-243875",seasons:{'1':'374678','2':'464999','3':'532135'}}}}
+const num=(l,re)=>{const m=String(l||'').match(re);return m?m[1]:''};
+function lnkBase(n,film,weekly,lab,se0,ep0,yr){
+  const a=(href,t,dr)=>`<a class="x lk${dr?' dr':''}" data-n="${esc(n)}" data-k="${film?'film':'show'}" title="${t}: ${dr?'click to open · right-click to edit the link':'search (no direct link saved yet) · right-click to set the link'}" href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${esc(n)} on ${t}${dr?'':' (search)'}">⭐</a>`;
+  const e=LK[nk(n)]||{};
+  if(film){const y=yr||(String(n).match(/\((\d{4})\)/)||[])[1]||'',q=String(n).replace(/\s*\(\d{4}\)\s*$/,'').replace(/\s+(movie|film)\s*$/i,'')+(y?' '+y:'');return e.lb?a(e.lb,'Letterboxd',1):a(LBX(q),'Letterboxd',0)}
+  const l=String(lab||''),se=se0||num(l,/\bS(\d+)\b/i)||num(l,/Season\s*(\d+)/i)||num(l,/Part\s*(\d+)/i),ep=weekly?(ep0||num(l,/\bEp\s*(\d+)/i)):'';
+  if(e.sz){const z=e.sz;let u='https://www.serializd.com/show/'+(z.slug||z.id);
+    if(se||ep){const sn=se||'1',ids=z.seasons||{},sid=ids[sn]||Object.values(ids)[0]||'1';u+='/season/'+sid+'/'+sn+(ep?'/episode/'+ep:'')}
+    return a(u,'Serializd',1)}
+  if(e.szraw)return a(e.szraw,'Serializd',1);
+  return a(SRZ(n.replace(/\s*\(.*?\)\s*$/,'')),'Serializd',0)}
+function lnkH(n,film,weekly,lab,se0,ep0,yr){const h=lnkBase(n,film,weekly,lab,se0,ep0,yr);
+  return film?h:h+`<button class="x szset" data-n="${esc(n)}" title="Set the Serializd link for this show" aria-label="Set the Serializd link for ${esc(n)}">🔗</button>`}
+function parseLink(u){
+  let m=u.match(/letterboxd\.com\/film\/([^\/\s?#]+)/i);if(m)return{k:'lb',v:'https://letterboxd.com/film/'+m[1]+'/'};
+  m=u.match(/serializd\.com\/show\/((?:[^\/\s]*?-)?(\d+))(?=[\/?#\s]|$)(?:\/season\/(\d+)\/(\d+))?/i);if(m)return{k:'sz',slug:m[1],id:m[2],sid:m[3],sn:m[4]};
+  return null}
+function saveLinks(text){let n=0;const bad=[];
+  text.split('\n').forEach(line=>{line=line.trim();if(!line)return;
+    const um=line.match(/(https?:\/\/\S+)\s*$/);if(!um){bad.push(line);return}
+    const title=line.slice(0,um.index).replace(/[\s\-–—:|]+$/,'').replace(/\s+(season|episode|ep)\b.*$/i,'').trim(),p=parseLink(um[1]);
+    if(!title||!p){bad.push(line);return}
+    const k=nk(title),cur=LK[k]?{...LK[k]}:{};
+    if(p.k==='lb')cur.lb=p.v;else{const z=cur.sz?{id:p.id,slug:p.slug,seasons:{...cur.sz.seasons}}:{id:p.id,slug:p.slug,seasons:{}};if(p.sid)z.seasons[p.sn]=p.sid;cur.sz=z}
+    LK[k]=cur;n++});
+  sv('q-links-v1',LK);return{n,bad}}
+let leCtx=null;
+const lkRefresh=()=>{['b1','b2','b3','b4','rpt'].forEach(i=>last[i]='');draw()};
+function editSz(n){leCtx={n,film:false};const z=(LK[nk(n)]||{}).sz;
+  $('leh').textContent='Serializd link · '+n;$('leu').value=z?'https://www.serializd.com/show/'+(z.slug||z.id)+'/':'';
+  $('len').textContent="Paste the show's link, for example https://www.serializd.com/show/Georgie-%26-Mandy's-First-Marriage-243875/ and the page adds the season and episode to it for each row.";
+  $('led').showModal();$('leu').focus();$('leu').select()}
+function editPlay(a){leCtx={n:a.dataset.n,film:false,play:true};
+  $('leh').textContent='Watch link · '+leCtx.n;$('leu').value=WL[nk(leCtx.n)]||'';
+  $('len').textContent='Paste the page where this title plays on your OTT (the episode or film page). It replaces the search and shows on every page.';
+  $('led').showModal();$('leu').focus();$('leu').select()}
+function editLink(a){if(a.dataset.k==='play')return editPlay(a);if(a.dataset.k!=='film')return editSz(a.dataset.n);
+  leCtx={n:a.dataset.n,film:true};$('leh').textContent='Edit the Letterboxd link · '+leCtx.n;$('leu').value=a.href;$('len').textContent='Paste the film link from Letterboxd.';
+  $('led').showModal();$('leu').focus();$('leu').select()}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.szset');if(b)editSz(b.dataset.n)});
+/* click opens the link; right-click edits it */
+/* ---------- right-click rename ---------- */
+const LBLK={                   // known editable keys and their defaults
+  'chip-all':'All','chip-today':'Today','chip-tmr':'Tomorrow','chip-k':'K-drama ☯️','chip-m':'Movies 🎬',
+  'tab-t1':'Show List','tab-t2':'Watchlist','tab-t3':'OTT list','tab-t4':'Monthly Report',
+  'btn-r1':'Refresh','btn-r2':'Refresh','btn-r3':'Refresh','btn-r4':'Refresh',
+  'btn-gref':'Refresh all lists','btn-rtr':'Reset table','btn-rnext':'Create',
+  'btn-rauto':'Add with Claude','btn-wauto':'Add with Claude','btn-radd':'Add manually','btn-wadd':'Add manually','btn-add':'Add manually','btn-auto':'Add with Claude',
+  'btn-rt1':'Reset table','btn-rt2':'Reset table','btn-rt3':'Reset table','btn-rt4':'Reset table',
+  'btn-rf':'Refresh','btn-mlk':'Manage links'};
+function applyLbls(){Object.entries(LBLS).forEach(([k,v])=>{if(v===undefined)return;const [t,id]=k.split('-',2);if(t==='col'){document.querySelectorAll('th button[data-c="'+id+'"]').forEach(b=>b.firstChild&&b.firstChild.nodeType===3&&(b.firstChild.nodeValue=v))}
+  else if(t==='chip'){const b=document.querySelector('.chip[data-f="'+id+'"]');if(b)b.textContent=v}
+  else if(t==='tab'){const b=document.querySelector('.tabs button[data-t="'+id+'"]');if(b)b.firstChild&&b.firstChild.nodeType===3?b.firstChild.nodeValue=v:b.textContent=v}
+  else if(t==='btn'){const b=$(id);if(b)b.textContent=v}
+  else if(t==='rpt'){const li=document.querySelector('li button[data-id="'+id+'"]');if(li)li.closest('li').querySelector('.rttitle') /* handled in drawRpt */}})}
+let renCtx=null;
+function openRen(key,def,el){renCtx={key,def};const pop=$('renpop'),inp=$('reninp'),lab=$('renlab');
+  lab.textContent='Rename "'+def+'"';inp.value=LBLS[key]||def;pop.style.display='block';inp.focus();inp.select();
+  document.addEventListener('keydown',renKey,{once:false});renCtx.closer=e=>{if(!pop.contains(e.target)&&e.target!==el)closeRen()};document.addEventListener('pointerdown',renCtx.closer)}
+function closeRen(){$('renpop').style.display='none';document.removeEventListener('keydown',renKey);if(renCtx&&renCtx.closer)document.removeEventListener('pointerdown',renCtx.closer);renCtx=null}
+function saveRen(){if(!renCtx)return;const v=$('reninp').value.trim();if(!v)return;LBLS[renCtx.key]=v;sv('q-lbl-v1',LBLS);applyLbls();toast('Renamed to "'+v+'"','info');closeRen()}
+function renKey(e){if(e.key==='Enter')saveRen();else if(e.key==='Escape')closeRen()}
+$('rens').onclick=saveRen;$('renx').onclick=closeRen;
+function rcx(e){const t=e.target;
+  // tab buttons
+  const tab=t.closest&&t.closest('.tabs button[data-t]');if(tab){e.preventDefault();const id=tab.dataset.t;openRen('tab-'+id,LBLK['tab-'+id]||tab.textContent.trim(),tab);return}
+  // filter chips
+  const chip=t.closest&&t.closest('.chip[data-f]');if(chip){e.preventDefault();const id=chip.dataset.f;openRen('chip-'+id,LBLK['chip-'+id]||chip.textContent.trim(),chip);return}
+  // table column headers (sort buttons)
+  const colBtn=t.closest&&t.closest('th>button[data-c]');if(colBtn){e.preventDefault();const c=colBtn.dataset.c,txt=colBtn.firstChild&&colBtn.firstChild.nodeType===3?colBtn.firstChild.nodeValue:colBtn.textContent.split(/[▲▼]/)[0].trim();openRen('col-'+c,HEAD[c]||WHEAD[c]||txt,colBtn);return}
+  // table report column headers (grip buttons)
+  const rh=t.closest&&t.closest('.rt th[data-c] button[data-c]');if(rh){e.preventDefault();const c=rh.dataset.c,lbls=['Month','Films','Shows','Total'],txt=lbls[c]||c;openRen('rpt-col-'+c,txt,rh);return}
+  // bar buttons (not in a table, not a chip)
+  const bar=t.closest&&t.closest('.bar button:not(.chip):not(.undo)');if(bar&&bar.id&&!bar.closest('table')){e.preventDefault();const k='btn-'+bar.id;openRen(k,LBLK[k]||bar.textContent.trim(),bar);return}
+  // title in any table row (all lists)
+  const nm=t.closest&&t.closest('td.sh .nm,td.sh span:not(.hint)');if(nm){const row=nm.closest('tr');if(!row)return;const id=nm.dataset.id;
+    e.preventDefault();if(id)open(shows.find(s=>s.id===id));else{const wr=wItem(nm.closest('td.sh').querySelector('input,select:not(.ty)')&&nm.closest('tr').querySelector('[data-id]')&&nm.closest('tr').querySelector('[data-id]').dataset.id);if(wr)openRen('wl-'+wr.id,wr.n,nm);}return}
+  // report entry title (replaces the ✏️ button)
+  const rptli=t.closest&&t.closest('li');if(rptli&&rptli.closest('#rpt')){const btn=rptli.querySelector('.ed');if(btn){e.preventDefault();const r=RPT.find(x=>x.id===btn.dataset.id);if(r)openRpt(r)};return}
+  // link buttons handled elsewhere
+  if(t.closest&&t.closest('a.lk,a.pl'))return}
+document.addEventListener('contextmenu',rcx);
+document.addEventListener('contextmenu',e=>{const a=e.target.closest&&e.target.closest('a.lk,a.pl');if(!a)return;e.preventDefault();editLink(a)});
+$('lex').onclick=()=>$('led').close();
+$('les').onclick=()=>{const u=$('leu').value.trim();
+  if(!leCtx||!/^https?:\/\/\S+$/i.test(u)){$('len').textContent='Enter a full link that starts with https://';return}
+  if(leCtx.play){WL[nk(leCtx.n)]=u;sv('q-watchlinks-v1',WL);$('led').close();lkRefresh();toast('Watch link saved for "'+leCtx.n+'": ▶️ now opens it on every page');return}
+  const k=nk(leCtx.n),cur=LK[k]?{...LK[k]}:{};
+  if(leCtx.film)cur.lb=u;
+  else{const p=parseLink(u);if(p&&p.k==='sz'){const z=cur.sz?{id:p.id,slug:p.slug,seasons:{...cur.sz.seasons}}:{id:p.id,slug:p.slug,seasons:{}};if(p.sid)z.seasons[p.sn]=p.sid;cur.sz=z;delete cur.szraw}else cur.szraw=u}
+  LK[k]=cur;sv('q-links-v1',LK);$('led').close();lkRefresh();toast('Link saved for "'+leCtx.n+'": updated on every page')};
+$('ler').onclick=()=>{if(!leCtx)return;
+  if(leCtx.play){delete WL[nk(leCtx.n)];sv('q-watchlinks-v1',WL);$('led').close();lkRefresh();toast('Saved watch link removed for "'+leCtx.n+'"; ▶️ searches again','info');return}LK[nk(leCtx.n)]=null;sv('q-links-v1',LK);$('led').close();lkRefresh();toast('Automatic link restored for "'+leCtx.n+'" on every page','info')};
+function openLinks(t){$('lks').textContent='';$('lkt').value=t?t+' - ':'';$('lkd').showModal();$('lkt').focus()}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.lkset');if(b)openLinks(b.dataset.n)});
+$('mlk').onclick=()=>openLinks('');
+$('lkc').onclick=()=>$('lkd').close();
+$('lkb').onclick=()=>{const r=saveLinks($('lkt').value);
+  $('lks').textContent=r.n?`Saved ${r.n} link${r.n>1?'s':''}.`+(r.bad.length?' Could not read: '+r.bad.join(' | '):''):'No valid link found. Use: Title - https://…';
+  if(r.n){['b1','b2','b3','b4','rpt'].forEach(i=>last[i]='');draw()}};
+const sel=(c,attrs)=>{c=c||'❓';const o=PLAT.includes(c)?PLAT:[...PLAT,c];return`<select class="ps" data-p="${esc(c)}" ${attrs} aria-label="India OTT">`+o.map(p=>`<option${p===c?' selected':''}>${esc(p)}</option>`).join('')+'</select>'};
+const fillSel=(id,v)=>{$(id).innerHTML=PLAT.map(p=>`<option>${esc(p)}</option>`).join('');$(id).value=PLAT.includes(v)?v:'❓'};
+const kx=(c,r)=>{const s=r.s,e=r.e;switch(c){case 0:case 3:return sk(e);case 1:return s.n.toLowerCase();case 2:return e.l.toLowerCase();case 4:return(s.vn==='T'||!e.k)?Infinity:(+e.t+19800000)%DAY;case 5:return e.k?+hhmm(e.t,zoneOf(s)).replace(':',''):Infinity;default:return(ovr[s.n.toLowerCase()]||s.p||'❓')==='❓'?Infinity:(ovr[s.n.toLowerCase()]||s.p).toLowerCase()}};
+const cmpBy=(st,kf)=>(a,b)=>{const x=kf(st.c,a),y=kf(st.c,b);if(x===y)return(a.e?sk(a.e)-sk(b.e):0)||0;if(x===Infinity)return 1;if(y===Infinity)return-1;return(typeof x==='string'?x.localeCompare(y,undefined,{numeric:true}):x-y)*st.d};
+/* ---------- RENDER ---------- */
+const HEAD=['⏳','Title','Ep','Date','IST','Local','OTT'];
+const WHEAD=['Title','Type','Season','Episode','✓ Watched','Deadline','⏳ Deadline countdown','India OTT'];
+const OC=ld('q-cols-v1')||{};
+const TB={b1:['h1','q1',7],b2:['h2','o2',8],b3:['h3','q3',7],b4:['h4','q4',7]};
+const ordOf=id=>{const n=TB[id][2],o=OC[TB[id][1]];return Array.isArray(o)&&o.length===n&&[...o].sort((a,b)=>a-b).every((v,i)=>v===i)?o:[...Array(n).keys()]};
+const thH=(i,h,b,z=1)=>`<th data-c="${i}"><span class="gr" title="Drag to move this column" aria-hidden="true">⠿</span>${b?`<button data-c="${i}">${h}</button>`:h}${z?'<span class="rz" title="Drag to resize this column" aria-hidden="true"></span>':''}</th>`;
+const sortHead=(id,arr,ok)=>$(id).innerHTML='<tr>'+arr.map((h,i)=>thH(i,h,1,ok?ok.includes(i):1)).join('')+'</tr>';
+sortHead('h1',HEAD,[1,2,5]);sortHead('h2',WHEAD);
+['h3','h4'].forEach(id=>$(id).innerHTML='<tr>'+HEAD.map((h,i)=>thH(i,h,0)).join('')+'</tr>');
+function reorderRows(el,o){[...el.children].forEach(tr=>{if(tr.children.length===o.length){const c=[...tr.children];o.forEach(i=>tr.appendChild(c[i]))}})}
+const reorderBody=id=>id==='rpt'?applyRpt():TB[id]&&reorderRows($(id),ordOf(id));
+function reorderHead(id){const tr=$(TB[id][0]).firstElementChild;if(!tr)return;const c=[...tr.children].sort((a,b)=>a.dataset.c-b.dataset.c);ordOf(id).forEach(i=>tr.appendChild(c[i]))}
+Object.keys(TB).forEach(reorderHead);
+const CW=ld('q-wid-v1')||{};
+if(!CW.m3){for(const k of['q1','o2','q3','q4'])if(Array.isArray(CW[k]))CW[k][CW[k].length-1]=0;CW.m3=1;sv('q-wid-v1',CW)}   // one-time: drop old wide OTT widths
+const minW=(id,c)=>c===TB[id][2]-1?(id==='b1'||id==='b2'?150:235):(id==='b1'&&c===2?215:50);   // OTT stays compact; the Ep column never starts narrower than its buttons
+function applyWidths(id){const [h,key]=TB[id],tbl=$(h).closest('table'),w=CW[key],ths=[...$(h).querySelectorAll('th')];
+  if(!Array.isArray(w)){tbl.classList.remove('fx');tbl.style.width='';tbl.style.minWidth='';ths.forEach(t=>t.style.width='');return}
+  tbl.classList.add('fx');let sum=0;ths.forEach(t=>{const c=+t.dataset.c,v=Math.max(w[c]||120,minW(id,c));t.style.width=v+'px';sum+=v});
+  tbl.style.width=sum+'px';tbl.style.minWidth=sum+'px'}
+Object.keys(TB).forEach(applyWidths);
+const pad2=n=>String(n).padStart(2,'0');
+function fmtEp(l){const s=String(l),sn=(s.match(/\bS(\d+)\b/i)||s.match(/Season\s*(\d+)/i)||s.match(/Part\s*(\d+)/i)||[])[1],m=s.match(/\bEp\s*(\d+)(?:\s*[–-]\s*(\d+))?/i);
+  if(m)return's'+pad2(sn||1)+'e'+pad2(m[1])+(m[2]?'–e'+pad2(m[2]):'');
+  return sn?s.replace(/\bS\d+\b|Season\s*\d+|Part\s*\d+/i,'s'+pad2(sn)):s}
+let WL=ld('q-watchlinks-v1')||{};           // exact "watch" links you saved; one per title, used on every page
+const OTTS_URL={'Netflix':q=>'https://www.netflix.com/search?q='+q,'Prime Video':q=>'https://www.primevideo.com/search?phrase='+q,
+  'JioHotstar':q=>'https://www.hotstar.com/in/search?q='+q,'Disney+':q=>'https://www.hotstar.com/in/search?q='+q,
+  'Apple TV+':q=>'https://tv.apple.com/in/search?term='+q,'YouTube':q=>'https://www.youtube.com/results?search_query='+q};
+function playH(n,plat,film){
+  const k=nk(n),name=n.replace(/\s*\(.*?\)\s*$/,'').replace(/\s+(movie|film)$/i,''),q=encodeURIComponent(name),p=plat||'❓',direct=WL[k];
+  let href,tip;
+  if(direct){href=direct;tip='Open your saved link'}
+  else if(p==='Theatres'){href='https://www.google.com/search?q='+encodeURIComponent(name+' tickets BookMyShow');tip='Find tickets'}
+  else if(OTTS_URL[p]){href=OTTS_URL[p](q);tip='Search '+p}
+  else{href='https://www.justwatch.com/in/search?q='+q;tip='See where it streams in India (JustWatch)'}
+  return`<a class="x pl${direct?' dr':''}" data-n="${esc(n)}" data-k="play" title="${esc(tip)} · right-click to save the exact link" href="${esc(href)}" target="_blank" rel="noopener noreferrer" aria-label="Watch ${esc(n)}">▶️</a>`}
+function rowH(s,e,o={}){
+  let c='',cl='cd',dt='';
+  if(e.est&&e.d){const n=dd(e.d,TODAY);c=n>0?'⏳ ~'+(n>=60?Math.round(n/30)+'mo':n+'d'):'⏳ ~due';cl+=' u'}
+  else if(e.k&&e.t>NOW)dt=` data-t="${+e.t}"`;else if(rel(e,NOW,TODAY)){c='✅ Aired';cl+=' a'}else{c='❓';cl+=' u'}
+  const key=s.id+'|'+e.l,T=s.vn==='T',film=s.ty==='m',ic=(s.ty==='k'?' ☯️':'')+(film?' 🎬':''),k=s.n.toLowerCase();
+  const nm=o.chk?`<span class="nm" data-id="${s.id}" title="Edit">${esc(s.n)}</span>`:`<span>${esc(s.n)}</span>`;
+  const lk=lnkH(s.n,film,(!!s.kind&&s.kind!=='single')||!!e.bg,e.l,'','',e.d?e.d.slice(0,4):'');
+  const bc=(o.chk&&e.bg&&EPC[s.id])?EPC[s.id]:'',rc=[o.x?'ex':'',T?'t':'',bc?'rc':'',s.ty==='k'?'ty-k':'',film?'ty-m':''].filter(Boolean).join(' '),epl=film?(T?e.l:'Digital'):fmtEp(e.l);
+  const ck=o.chk?`<input type="checkbox" class="ck" data-k="${esc(key)}" data-id="${s.id}" aria-label="Mark ${esc(s.n)} ${esc(e.l)} watched">`:'';
+  const pv=o.prev?`<button class="x pv" data-id="${s.id}" title="Previous episode" aria-label="Previous episode of ${esc(s.n)}">🔙</button>`:'';
+  const wl=o.chk?`<button class="x wl" data-id="${s.id}" title="Add to Watchlist" aria-label="Add ${esc(s.n)} to the Watchlist">➕</button>`:'';
+  const dlb=o.del?`<button class="x dl" data-id="${s.id}" data-n="${esc(s.n)}" data-d="${e.d||''}" title="Delete" aria-label="Delete ${esc(s.n)}">❌</button>`:'';
+  const epCell=o.chk?`<span class="act">${ck}<span class="ept">${esc(epl)}</span>${pv}${lk}${wl}</span>`:esc(epl);
+  const tea=o.chk?` class="te" data-id="${s.id}" data-l="${esc(e.l)}" title="Click to set the release time"`:(s.pk?` class="te" data-pk="${esc(s.pk)}" title="Click to set the release time"`:'');
+  return`<tr${rc?` class="${rc}"`:''}${bc?` style="--rc:${bc}"`:''}><td class="${cl}"${dt}>${c}</td><td class="sh">${playH(s.n,ovr[k]||s.p,film)}${nm}${ic}</td><td>${epCell}</td><td${o.chk?` class="de" data-id="${s.id}" data-l="${esc(e.l)}" title="Click to set or edit the release date"`:''}>${dl(e,TODAY)}</td><td${tea}>${e.est?'—':tm(e)}</td><td${tea}>${e.est?'—':localCell(s,e)}</td><td><div class="ot">${sel(ovr[k]||s.p,`data-n="${esc(k)}"`)}${o.chk?'':lk}${dlb}</div></td></tr>`}
+const part=(t,a)=>a.length?`<tr class="part ${t[0]==='T'?'t':'o'}"><td colspan="7">${t} · ${a.length}</td></tr>`+a.join(''):'';
+function setH(id,h){if(last[id]!==h){last[id]=h;$(id).innerHTML=h;reorderBody(id)}}
+const NONE=(w,m)=>`<tr><td class="none" colspan="${w}">${m}</td></tr>`;
+function draw1(){
+  let rows=[];shows.forEach(s=>rowsFor(s).forEach((e,j)=>rows.push({s,e,x:j>0,first:j===0})));
+  const total=rows.length;
+  rows=rows.filter(r=>(flt==='all'||(flt==='today'&&dl(r.e,TODAY)==='Today')||(flt==='tmr'&&dl(r.e,TODAY)==='Tomorrow')||(flt==='k'&&r.s.ty==='k')||(flt==='m'&&r.s.ty==='m'))&&(!qs||r.s.n.toLowerCase().includes(qs))&&catOk(CAT.t1,r.s));
+  rows.sort(cmpBy(SORT.q,kx));
+  const f=r=>rowH(r.s,r.e,{chk:1,del:1,prev:r.first&&isWk(r.s),x:r.x});
+  setH('b1',rows.length?part('OTT / Streaming',rows.filter(r=>r.s.vn!=='T').map(f))+part('Theatrical',rows.filter(r=>r.s.vn==='T').map(f)):NONE(7,'No titles match. Add one or clear the filter.'));
+  $('f1').textContent=`${rows.length} of ${total} rows · tick a row: shows go to their next episode (a whole season steps through its episodes), films and finales are removed · later episodes out the same week get their own row (amber edge) · plum edge = theatrical · ~ expected date · 👈 India is a day later than local, 👉 a day earlier · click a time to set it in ET, PT, IST, KST or JST · click a title to edit it or a date to change it.`;
+}
+function poolBuild(p){const k=norm(p.n)+'|'+p.d,ov=TOV[k]||{},d=ov.dsh?add(p.d,ov.dsh):p.d;
+  const s={id:'p',pk:k,n:p.n,ty:p.ty,vn:p.vn,loc:p.loc,p:p.p,z:ov.z,zt:ov.zt};
+  const e=E(p.l,d,p.t||((p.ty==='m'&&p.vn==='O')?'12:30':''));zoneApply(e,s);return{s,e}}
+function weekRows(st){
+  const en=add(st,7),mine=new Set(shows.map(s=>norm(s.n))),out=[],seen=new Set();
+  [...POOL0,...pool].forEach(p=>{const k=norm(p.n)+'|'+p.d;
+    if(p.d>=st&&p.d<en&&!mine.has(norm(p.n))&&!HID[p.n.toLowerCase()+'|'+p.d]&&!seen.has(k)){seen.add(k);
+      out.push(poolBuild(p))}});
+  return out.sort((a,b)=>sk(a.e)-sk(b.e));
+}
+function draw34(){
+  const w0=mon(TODAY);
+  [['b3',w0,'s3'],['b4',add(w0,7),'s4']].forEach(([id,st,hid])=>{
+    const rows=weekRows(st).filter(r=>catOk(CAT.t3,r.s)),f=r=>rowH(r.s,r.e,{del:1});
+    setH(id,rows.length?part('OTT / Streaming',rows.filter(r=>r.s.vn!=='T').map(f))+part('Theatrical',rows.filter(r=>r.s.vn==='T').map(f)):NONE(7,'Nothing new for this week yet. Try Refresh.'));
+    $(hid).textContent=`${fd(st)} – ${fd(add(st,6))}`});
+}
+const wts=x=>x.dl?+new Date(x.dl+'T23:59:59+05:30'):Infinity;
+const wdef=(a,b)=>{const x=a.w,y=b.w,gx=x.dl?2:(x.ts?1:3),gy=y.dl?2:(y.ts?1:3);if(gx!==gy)return gx-gy;if(gx===1)return y.ts-x.ts;if(gx===2)return wts(x)-wts(y);return 0};   // new (no deadline) first, then by deadline, then the rest
+const kw=(c,r)=>{const x=r.w;switch(c){case 0:return x.n.toLowerCase();case 1:return x.ty;case 2:return x.ty==='film'||x.se===''?Infinity:+x.se;case 3:return x.ty==='film'||x.ep===''?Infinity:+x.ep;case 4:return 0;case 5:case 6:return wts(x);default:return(x.p||'❓')==='❓'?Infinity:x.p.toLowerCase()}};
+function draw2(){
+  const ae=document.activeElement;
+  const rows=watch.filter(x=>(!wqs||x.n.toLowerCase().includes(wqs))&&(!CAT.t2||(CAT.t2==='sh')===(x.ty!=='film'))).map(w=>({w})).sort(SORT.w.c<0?wdef:cmpBy(SORT.w,kw));
+  const h=rows.map(({w:x})=>{const sh=x.ty!=='film';
+    return`<tr><td class="sh">${playH(x.n,x.p,!sh)}${esc(x.n)}${(sh&&x.se!==''&&x.ep!=='')?` <span class="sepill">s${pad2(x.se)}e${pad2(x.ep)}</span>`:''}</td><td><select class="ty" data-id="${x.id}" aria-label="Type"><option value="show"${sh?' selected':''}>Show</option><option value="film"${sh?'':' selected'}>Film</option></select></td>`+
+    `<td>${sh?`<input class="in n" type="number" min="1" data-f="se" data-id="${x.id}" value="${esc(x.se)}" aria-label="Season number">`:'—'}</td>`+
+    `<td>${sh?`<input class="in n" type="number" min="0" data-f="ep" data-id="${x.id}" value="${esc(x.ep)}" aria-label="Episode number">`:'—'}</td>`+
+    `<td><span class="act"><input type="checkbox" class="wk" data-id="${x.id}" aria-label="${sh?'Watched: go to next episode':'Watched: remove film'}">${sh?`<button class="x pv" data-id="${x.id}" title="Previous episode" aria-label="Previous episode of ${esc(x.n)}">🔙</button>`:''}${lnkH(x.n,x.ty==='film',true,'',x.se,x.ep)}</span></td>`+
+    `<td><input class="in" type="date" data-f="dl" data-id="${x.id}" value="${esc(x.dl)}" aria-label="Deadline date"></td><td class="dc" data-d="${x.dl?wts(x):''}"></td>`+
+    `<td><div class="ot">${sel(x.p,`data-w="${x.id}"`)}<button class="x dl" data-id="${x.id}" title="Delete" aria-label="Delete ${esc(x.n)}">❌</button></div></td></tr>`}).join('')||NONE(8,'Nothing here yet. Add a title.');
+  if(last.b2!==h&&ae&&ae.closest&&ae.closest('#b2')&&(ae.tagName==='INPUT'&&ae.type!=='checkbox'))return;
+  setH('b2',h);
+}
+const z=(tz,lab)=>{const p=new Intl.DateTimeFormat('en-US',{timeZone:tz,weekday:'short',hour:'numeric',minute:'2-digit',second:'2-digit',timeZoneName:'short'}).formatToParts(new Date());
+  const g=k=>p.find(x=>x.type===k)?.value||'';return`<span><b>${lab||g('timeZoneName')}</b>${g('weekday')} ${g('hour')}:${g('minute')}:${g('second')} ${g('dayPeriod')}</span>`};
+function tick(){
+  const now=Date.now();let redo=false;
+  $('clk').innerHTML=[z(ZN.ET,'ET'),z(ZN.PT,'PT'),z(ZN.IST,'IST'),z(ZN.KST,'KST')].join('');
+  document.querySelectorAll('td.cd[data-t]').forEach(c=>{const ms=c.dataset.t-now;if(ms<=0){redo=true;return}c.textContent=cdf(ms);c.parentNode.classList.toggle('soon',ms<36e5)});
+  document.querySelectorAll('td.dc').forEach(c=>{const d=c.dataset.d;if(!d){c.textContent='—';c.className='dc';return}
+    const ms=d-now;if(ms<=0){c.textContent='⏰ Deadline passed';c.className='dc late'}else{c.textContent=cdf(ms);c.className='dc'+(ms<864e5?' s2':'')}});
+  if(redo)draw();
+}
+function draw(){NOW=new Date();TODAY=istDay(NOW);draw1();draw2();draw34();drawRpt();tick();applyLbls()}
+/* ---------- CONFIRMATION ---------- */
+function confirmBox(title,msg,yes,label){if(yes)yes()}      // no popups any more: actions run at once, ↩️ Undo brings them back
+$('cn').onclick=()=>{cfYes=null;$('cf').close()};
+$('cy').onclick=()=>{const f=cfYes;cfYes=null;$('cf').close();if(f)f()};
+$('cf').addEventListener('cancel',()=>{cfYes=null});
+const stat=(id,m)=>{$(id).textContent=m;if(m&&!/…$/.test(m))toast(m,/^(Could not|Permission|Claude is not|Too many|Enter |Use the|Type )/.test(m)?'err':/already|Nothing new/.test(m)?'info':'ok')};
+function toast(msg,type){type=type||'ok';const c=$('toasts');if(!c||!msg)return;LASTTOAST=msg;
+  try{if(c.showPopover&&!c.matches(':popover-open'))c.showPopover()}catch(e){}
+  const d=document.createElement('div');d.className='toast '+type;d.setAttribute('role',type==='err'?'alert':'status');
+  d.textContent=(type==='err'?'⚠️ ':type==='info'?'ℹ️ ':'✅ ')+msg;c.appendChild(d);
+  while(c.children.length>4)c.removeChild(c.firstChild);
+  setTimeout(()=>{d.remove()},type==='err'?6500:3400)}
+window.addEventListener('error',e=>toast('Something went wrong: '+(e.message||'unknown error'),'err'));
+window.addEventListener('unhandledrejection',e=>toast('Something went wrong: '+((e.reason&&e.reason.message)||'request failed'),'err'));
+const doneMsg=st=>{const m=st.textContent;if(m&&!/…$/.test(m))toast(m,/^(Could not|Permission|Claude is not|Too many|Type |Use )/.test(m)?'err':'ok')};
+/* ---------- LIST 1 ---------- */
+const dlg=$('dlg'),fm=$('fm');
+document.querySelectorAll('.chip').forEach(b=>b.onclick=()=>{flt=b.dataset.f;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));draw()});
+$('q').oninput=e=>{qs=e.target.value.trim().toLowerCase();draw()};
+function updSort(id,st){document.querySelectorAll('#'+id+' th').forEach(th=>th.setAttribute('aria-sort',+th.dataset.c===st.c?(st.d>0?'ascending':'descending'):'none'))}
+const sortClick=(id,st)=>$(id).onclick=e=>{const b=e.target.closest('button[data-c]');if(!b)return;const c=+b.dataset.c;if(st.c===c)st.d=-st.d;else{st.c=c;st.d=1}updSort(id,st);draw()};
+sortClick('h1',SORT.q);sortClick('h2',SORT.w);
+const showKind=()=>{const k=fm.kind.value;
+  $('g1').style.display=k==='list'?'none':'grid';$('g2').style.display=k==='list'?'flex':'none';
+  ['lb','ld','le2','le3','le4'].forEach(i=>$(i).style.display=k==='single'?'flex':'none');
+  ['lp','lc','lf'].forEach(i=>$(i).style.display=(k==='weekly'||k==='pair')?'flex':'none')};
+fm.kind.onchange=showKind;
+function open(s){
+  cur=s||null;$('dt').textContent=s?'Edit title':'Add title';$('del').style.display=s?'':'none';
+  const v=s||{n:'',ty:'s',vn:'O',p:'❓',loc:'',kind:'weekly',prefix:'Ep ',first:1,count:10,start:'',t:'',label:'',dl:'',fin:0,list:[]};
+  fm.n.value=v.n;fm.ty.value=v.ty||'s';fm.vn.value=v.vn||'O';fillSel('fp',ovr[v.n.toLowerCase()]||v.p);fm.lz.value=zoneOf(v);fm.zn.value=v.z||ZN.IST;fm.kind.value=v.kind;fm.fin.checked=!!v.fin;
+  fm.start.value=v.start||'';fm.t.value=v.zt||v.t||'';fm.label.value=v.label||'';fm.prefix.value=v.prefix??'Ep ';fm.count.value=v.count||10;fm.first.value=v.first??1;fm.dl.value=v.dl||'';fm.eps.value=v.eps||'';fm.est.checked=!!v.est;fm.estm.checked=!!v.estm;
+  fm.list.value=(v.list||[]).map(x=>[x.l,x.d||'',x.t||'',(x.f?'f':'')+(x.a?'a':'')].join(' | ')).join('\n');
+  showKind();dlg.showModal();fm.n.focus();
+}
+$('add').onclick=()=>open(null);$('cx').onclick=()=>dlg.close();
+$('del').onclick=()=>{const s=cur;dlg.close();askDelQ(s)};
+fm.onsubmit=()=>{
+  const o=cur||{id:uid()},prev=JSON.parse(JSON.stringify(o));
+  Object.assign(o,{n:fm.n.value.trim(),ty:fm.ty.value,vn:fm.vn.value,p:fm.p.value,lz:fm.lz.value,kind:fm.kind.value,fin:fm.fin.checked?1:0,
+    start:fm.start.value,t:(fm.zn.value===ZN.IST?fm.t.value:''),label:fm.label.value.trim(),prefix:fm.prefix.value,count:+fm.count.value||1,first:+fm.first.value||0,dl:fm.dl.value.trim(),eps:+fm.eps.value||0,est:fm.est.checked?1:0,estm:fm.estm.checked?1:0});
+  if(o.vn==='T'&&o.kind==='single'&&!o.t)o.t='09:00';
+  if(o.kind!=='list'){if(fm.t.value){o.z=fm.zn.value;o.zt=fm.t.value}else{delete o.z;delete o.zt}}
+  o.list=fm.list.value.split('\n').map(l=>l.split('|').map(x=>x.trim())).filter(x=>x[0]).map(x=>({l:x[0],d:x[1]||'',t:x[2]||'',f:/f/i.test(x[3]||''),a:/a/i.test(x[3]||'')}));
+  if(cur){o.lk=[...new Set([...(o.lk||[]),...['n','start','t','label','list','p','loc','z','zt','lz'].filter(f=>JSON.stringify(o[f])!==JSON.stringify(prev[f]))])]}
+  else{shows.push(o);rmSet(rmGet().filter(x=>x!==o.n.toLowerCase()))}
+  if(o.p&&o.p!=='❓')delete ovr[o.n.toLowerCase()];sv('q-ott-v1',ovr);
+  save();draw();toast((cur?'Saved changes to "':'Added "')+o.n+'"');
+};
+function askDelQ(s){if(!s)return;confirmBox('Delete this title?','"'+s.n+'" will be removed from list 1.',()=>{
+  rmSet([...new Set([...rmGet(),s.n.toLowerCase()])]);shows=shows.filter(x=>x.id!==s.id);save();draw();toast('Deleted "'+s.n+'"')},'Yes, delete')}
+function addToWatch(s){if(!s)return;
+  if(watch.some(w=>norm(w.n)===norm(s.n))){stat('st1','"'+s.n+'" is already in the Watchlist.');return}
+  const src=String(s.label||s.prefix||''),sn=(src.match(/\bS(\d+)\b/i)||src.match(/Season\s*(\d+)/i)||[])[1]||'1';
+  watch.push({id:uid(),n:s.n,ty:s.ty==='m'?'film':'show',se:s.ty==='m'?'':sn,ep:'',p:ovr[s.n.toLowerCase()]||s.p||'❓',dl:'',ts:Date.now()});
+  saveW();draw();stat('st1','Added "'+s.n+'" to the Watchlist.')}
+function bindOtt(id){$(id).addEventListener('change',e=>{const t=e.target;if(!t.classList.contains('ps')||!t.dataset.n)return;ovr[t.dataset.n]=t.value;sv('q-ott-v1',ovr);draw();toast('OTT set to '+t.value+' for every list')})}
+$('b1').addEventListener('click',e=>{
+  const t=e.target,id=t.dataset&&t.dataset.id;
+  if(t.classList.contains('ck')){e.preventDefault();const s=shows.find(x=>x.id===id),key=t.dataset.k,eps=expand(s),idx=eps.findIndex(x=>s.id+'|'+x.l===key),end=!isWk(s)||idx>=eps.length-1;
+    const go=()=>{logTick(s,key,true);
+      if(end){rmSet([...new Set([...rmGet(),s.n.toLowerCase()])]);shows=shows.filter(x=>x.id!==s.id);delete PTR[s.id];sv('q-ptr-v1',PTR);save();toast('"'+s.n+'" watched: added to the Monthly Report and removed')}
+      else{PTR[s.id]=idx+1;sv('q-ptr-v1',PTR);if(eps[idx].bg){EPC[s.id]=randCol();sv('q-epc-v1',EPC)}toast(s.n+' → '+fmtEp(eps[idx+1].l))}
+      draw()};
+    if(end)confirmBox('Mark as watched?','"'+s.n+'" is marked watched, added to the Monthly Report and removed from the list.',go,'Yes, remove');
+    else go()}              // weekly shows move on at once; Previous undoes it
+  else if(t.classList.contains('pv')){const s=shows.find(x=>x.id===id);PTR[id]=Math.max(0,(PTR[id]||0)-1);sv('q-ptr-v1',PTR);draw();toast((s?s.n:'Show')+' → previous episode','info')}
+  else if(t.classList.contains('wl'))addToWatch(shows.find(x=>x.id===id));
+  else if(t.classList.contains('dl'))askDelQ(shows.find(x=>x.id===id));
+  else if(t.classList.contains('nm'))open(shows.find(x=>x.id===id))});
+/* ---------- set a release time in ET / PT / IST / KST / JST (the other times follow) ---------- */
+let tzCtx=null;
+function openTime(c){
+  let s,e,isPool=false;
+  if(c.dataset.pk){const p=[...POOL0,...pool].find(x=>norm(x.n)+'|'+x.d===c.dataset.pk);if(!p)return;({s,e}=poolBuild(p));isPool=true}
+  else{s=shows.find(x=>x.id===c.dataset.id);if(!s)return;e=expand(s).find(x=>x.l===c.dataset.l)}
+  if(!e)return;
+  if(!e.d){toast('Set a release date first (click the date)','err');return}
+  tzCtx={s,e,isPool,key:c.dataset.pk};
+  const z=zoneOf(s);$('tzh').textContent='Release time · '+s.n+(isPool?'':' · '+fmtEp(e.l));
+  $('tzz').value=z;$('tzt').value=e.k?hhmm(e.t,z):'';tzPrev();$('tzd').showModal();$('tzt').focus()}
+function tzPrev(){const c=tzCtx,z=$('tzz').value,t=$('tzt').value;if(!c)return;
+  if(!t){$('tzp').textContent='Pick a time.';return}
+  const r=retime(c.e,z,t),zl=z!==ZN.IST?z:zoneOf(c.s);
+  $('tzp').textContent=fdd(r.d1)+' · '+fmtZ(r.I1,ZN.IST)+' · '+fmtZ(r.I1,zl)+dayArrow(r.I1,zl)}
+$('tzz').onchange=tzPrev;$('tzt').oninput=tzPrev;
+$('tzx').onclick=()=>$('tzd').close();
+$('tzs').onclick=()=>{const c=tzCtx,z=$('tzz').value,t=$('tzt').value;if(!c||!t){toast('Pick a time first','err');return}
+  const r=retime(c.e,z,t),k=dd(r.d1,c.e.od||c.e.d),zl=z!==ZN.IST?z:zoneOf(c.s);
+  if(c.isPool){const o=TOV[c.key]||{};TOV[c.key]={z,zt:t,dsh:(o.dsh||0)+k};sv('q-tov-v1',TOV)}
+  else{const s=c.s;if(k)shiftDates(s,k);s.z=z;s.zt=t;s.lk=[...new Set([...(s.lk||[]),'t','z','zt','start'])];save()}
+  $('tzd').close();draw();toast(c.s.n+': '+fmtZ(r.I1,ZN.IST)+' · '+fmtZ(r.I1,zl)+dayArrow(r.I1,zl))};
+$('tzr').onclick=()=>{const c=tzCtx;if(!c)return;if(c.isPool){delete TOV[c.key];sv('q-tov-v1',TOV)}else{delete c.s.z;delete c.s.zt;save()}$('tzd').close();draw();toast('Manual time cleared for '+c.s.n,'info')};
+document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('td.te');if(c)openTime(c)});
+/* ---------- set / edit a release date (list 1) ---------- */
+let dtCtx=null;
+function parseDate(s){s=String(s).trim().toUpperCase();
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s))return s;
+  const m=s.match(/^(\d{1,2})[\s\-\/.]+([A-Z]{3,9})(?:[\s\-\/.]+(\d{2}|\d{4}))?$/);if(!m)return null;
+  const mi=MON3.indexOf(m[2].slice(0,3));if(mi<0)return null;
+  const y=!m[3]?+istDay(new Date()).slice(0,4):m[3].length===2?2000+(+m[3]):+m[3],d=+m[1],dt=new Date(Date.UTC(y,mi,d));
+  return(dt.getUTCMonth()===mi&&dt.getUTCDate()===d)?dt.toISOString().slice(0,10):null}
+function openDate(c){const s=shows.find(x=>x.id===c.dataset.id);if(!s)return;const ep=expand(s).find(x=>x.l===c.dataset.l);
+  dtCtx={s,l:c.dataset.l};$('dth').textContent='Release date · '+s.n+' · '+c.dataset.l;
+  $('dtu').value=ep&&ep.d?fdd(ep.d):'';$('dtn').textContent='Type it like 13 OCT (add the year for another year, e.g. 13 OCT 27).';$('dtd').showModal();$('dtu').focus()}
+$('dtx').onclick=()=>$('dtd').close();
+$('dts').onclick=()=>{const d=parseDate($('dtu').value);if(!d||!dtCtx){$('dtn').textContent='Use the form 13 OCT or 13 OCT 27.';return}
+  dtCtx.s.dov={...(dtCtx.s.dov||{}),[dtCtx.l]:d};save();$('dtd').close();draw();toast('Release date set: '+fdd(d))};
+$('dtr').onclick=()=>{if(!dtCtx)return;const v={...(dtCtx.s.dov||{})};delete v[dtCtx.l];dtCtx.s.dov=v;save();$('dtd').close();draw();toast('Scheduled date restored','info')};
+$('b1').addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('td.de');if(c)openDate(c)});
+bindOtt('b1');bindOtt('b3');bindOtt('b4');
+['b3','b4'].forEach(b=>$(b).addEventListener('click',e=>{const t=e.target;if(!t.classList.contains('dl'))return;
+  confirmBox('Delete this release?','"'+t.dataset.n+'" will be hidden from lists 3 and 4.',()=>{HID[t.dataset.n.toLowerCase()+'|'+t.dataset.d]=1;sv('q-hid-v1',HID);draw();toast('Deleted "'+t.dataset.n+'" from this list')},'Yes, delete')}));
+/* ---------- WATCHLIST ---------- */
+$('wq').oninput=e=>{wqs=e.target.value.trim().toLowerCase();draw()};
+$('wadd').onclick=()=>{$('wf').reset();fillSel('wp','❓');$('wd').showModal();$('wf').n.focus()};
+$('wcx').onclick=()=>$('wd').close();
+$('wf').onsubmit=()=>{const f=$('wf');watch.push({id:uid(),n:f.n.value.trim(),ty:f.ty.value,se:f.se.value,ep:f.ep.value,p:f.p.value,dl:f.dl.value,pl:1,ts:Date.now()});saveW();draw();toast('Added "'+f.n.value.trim()+'" to the Watchlist')};
+const wItem=id=>watch.find(w=>w.id===id);
+$('b2').addEventListener('input',e=>{const t=e.target,x=wItem(t.dataset.id);if(!x||!t.dataset.f)return;
+  x[t.dataset.f]=t.value;saveW();if(t.dataset.f==='dl'){const c=t.closest('tr').querySelector('.dc');c.dataset.d=x.dl?wts(x):'';tick()}});
+$('b2').addEventListener('change',e=>{const t=e.target,x=wItem(t.dataset.id||t.dataset.w);if(!x)return;
+  if(t.classList.contains('ty')){x.ty=t.value;saveW();draw()}
+  else if(t.dataset.f==='se'||t.dataset.f==='ep'){saveW();draw()}
+  else if(t.classList.contains('ps')){x.p=t.value;x.pl=1;t.dataset.p=t.value;saveW();toast('OTT for '+x.n+': '+t.value)}});
+$('b2').addEventListener('click',e=>{const t=e.target,x=wItem(t.dataset.id);if(!x)return;
+  if(t.classList.contains('wk')){e.preventDefault();
+    if(x.ty==='film')confirmBox('Remove this film?','"'+x.n+'" is marked watched and will be removed from the watchlist.',()=>{logFilm(x);watch=watch.filter(w=>w.id!==x.id);saveW();draw();toast('"'+x.n+'" watched: added to the Monthly Report and removed')},'Yes, remove');
+    else confirmBox('Mark episode watched?','"'+x.n+'" moves to episode '+((+x.ep||0)+1)+'.',()=>{x.ep=String((+x.ep||0)+1);if(x.se==='')x.se='1';saveW();draw();toast(x.n+' → s'+pad2(x.se)+'e'+pad2(x.ep))},'Yes')}
+  else if(t.classList.contains('pv'))confirmBox('Go back one episode?','"'+x.n+'" goes back to episode '+Math.max(0,(+x.ep||0)-1)+'.',()=>{x.ep=String(Math.max(0,(+x.ep||0)-1));saveW();draw();toast(x.n+' → s'+pad2(x.se||1)+'e'+pad2(x.ep),'info')},'Yes, go back');
+  else if(t.classList.contains('dl'))confirmBox('Delete this title?','"'+x.n+'" will be removed from the watchlist.',()=>{watch=watch.filter(w=>w.id!==x.id);saveW();draw();toast('Deleted "'+x.n+'" from the Watchlist')},'Yes, delete')});
+/* ---------- CLAUDE (add titles, fill gaps) ---------- */
+const RULES=`Convert every time to IST (ET is UTC-4 until 1 Nov 2026 then UTC-5, KST is UTC+9, IST is UTC+5:30); the IST date can differ from the local date. Never invent dates, times, platforms, seasons or episode counts: leave unknown fields empty or ❓.`;
+const OTTS=PLAT.filter(p=>p!=='☠️☠️☠️').join(', ');
+const PRQ=t=>`Today is ${istDay(new Date())} (IST). Convert the user's text into rows for a TV and movie release tracker. Output ONLY a JSON array, no prose, no code fences. Each item has: "n" title; "ty" "s" (show), "k" (K-drama) or "m" (movie); "vn" "O" (OTT or digital) or "T" (theatrical in cinemas); "p" India streaming platform, exactly one of: ${OTTS}; "loc" release time in the show's native timezone such as 9:00 PM ET, or ❓; "kind" "single", "weekly", "pair" (two releases on consecutive days each week) or "list" (irregular); "label" for single, such as Season 2; "prefix" for weekly or pair, such as Ep ; "first" first episode number; "count" number of episodes; "start" date of the first release in IST as YYYY-MM-DD, or empty; "t" 24h HH:MM IST release time, or empty if not known yet (use 09:00 for theatrical); "fin" 1 if the last item is a finale, else 0; "dl" text when the date is unknown; "list" for kind list only, an array of {"l":label,"d":"YYYY-MM-DD IST","t":"HH:MM IST or empty","f":true if final}. ${RULES} If the user gives only a title and you are not certain of its schedule, still return one row with start empty and dl "Date TBD". User text:\n${t}`;
+const PRW=t=>`Convert the user's text into watchlist rows. If the text names a movie franchise, return one item per film in release order, each with its year in the title, never a single "all movies" row. For a TV show return one row. Output ONLY a JSON array, no prose, no code fences. Each item has: "n" title; "ty" "show" or "film"; "p" India streaming platform, exactly one of: ${OTTS}, or ❓ if you are not sure. ${RULES} User text:\n${t}`;
+const PRG=a=>`For each title below, give the platform it streams on in India, exactly one of: ${OTTS}. Use ❓ unless you are confident. Output ONLY a JSON array of {"n":title,"p":platform}. Titles: ${JSON.stringify(a)}`;
+const PRR=(a,b)=>`Today is ${istDay(new Date())} (IST). List notable releases (theatrical and OTT) from India, the US and South Korea, plus any very big or popular releases elsewhere, between ${a} and ${b} (IST dates). Include only releases you are confident about from your own knowledge; omit anything uncertain, and answer [] if you know of none. Output ONLY a JSON array, no prose, no code fences. Each item: {"n":title,"ty":"s" show or "k" K-drama or "m" movie,"vn":"O" OTT or "T" theatrical,"l":label such as Season 2 or Film or Theatrical,"d":"YYYY-MM-DD","t":"HH:MM" IST or empty (09:00 for theatrical),"loc":"time in native timezone or ❓","p":"India platform, or Theatres, or ❓"}. ${RULES}`;
+const DT=/^\d{4}-\d{2}-\d{2}$/,TT=/^\d{2}:\d{2}$/,S60=(v,n)=>String(v==null?'':v).slice(0,n),okP=p=>PLAT.includes(p)?p:'❓';
+function clean(o){
+  if(!o||typeof o.n!=='string'||!o.n.trim())return null;
+  const kind=['single','weekly','pair','list'].includes(o.kind)?o.kind:'single';
+  const r={id:uid(),n:S60(o.n.trim(),120),ty:['s','k','m'].includes(o.ty)?o.ty:'s',vn:o.vn==='T'?'T':'O',p:okP(o.p),loc:S60(o.loc||'❓',40),kind,label:S60(o.label,60),prefix:o.prefix==null?'Ep ':S60(o.prefix,20),first:+o.first||1,count:Math.min(60,Math.max(1,+o.count||1)),start:DT.test(o.start)?o.start:'',t:TT.test(o.t)?o.t:'',fin:o.fin?1:0,dl:S60(o.dl,40),tz:'',sk:''};
+  if(r.vn==='T'&&kind==='single'&&!r.t)r.t='09:00';
+  if(kind==='list'){r.list=(Array.isArray(o.list)?o.list:[]).slice(0,80).filter(x=>x&&x.l).map(x=>({l:S60(x.l,40),d:DT.test(x.d)?x.d:'',t:TT.test(x.t)?x.t:'',f:!!x.f}));if(!r.list.length)r.kind='single'}
+  return r}
+async function askClaude(prompt){
+  const sm=window.claude&&await claude.use('sample');
+  if(!sm)throw{code:'none'};
+  const res=await sm(prompt,{cache:false}),m=String(res.text||'').match(/\[[\s\S]*\]/);
+  return m?JSON.parse(m[0]):[]}
+const errMsg=e=>e&&e.code==='not_granted'?'Permission to use Claude was declined.':e&&e.code==='none'?'Claude is not available in this view.':e&&e.code==='rate_limited'?'Too many requests. Try again in a moment.':'Could not read a result from that. Try again.';
+function openAuto(m){amode=m;$('ah').textContent=m==='q'?'Add with Claude · Q list':'Add with Claude · Watchlist';
+  $('ahi').textContent=m==='q'?'Type a title, or paste a release schedule or article text. Anything Claude can\'t confirm stays ❓. Titles you deleted before are skipped unless you name them.':'Type a title or a franchise name. A franchise is added as one row per film. Claude only fills the India OTT when it is confident.';
+  $('at').placeholder=m==='q'?'e.g. Dune Prophecy season 3':'e.g. Pirates of the Caribbean';$('as').textContent='';$('au').showModal();$('at').focus()}
+$('auto').onclick=()=>openAuto('q');$('wauto').onclick=()=>openAuto('w');$('ac').onclick=()=>$('au').close();
+$('ar').onclick=async()=>{
+  const text=$('at').value.trim(),st=$('as'),btn=$('ar');
+  if(!text){st.textContent='Type a title or paste a schedule first.';return}
+  if(amode==='r')return runRptAuto(text);
+  btn.disabled=true;st.textContent='Asking Claude…';
+  try{
+    const arr=await askClaude(amode==='q'?PRQ(text):PRW(text)),base=Date.now(),gone=rmGet(),low=text.toLowerCase(),added=[],dup=[],del=[];
+    arr.forEach(o=>{
+      if(amode==='w'){if(!o||typeof o.n!=='string'||!o.n.trim())return;const n=o.n.trim();
+        if(watch.some(x=>x.n.toLowerCase()===n.toLowerCase()))dup.push(n);else{watch.push({id:uid(),n:S60(n,120),ty:o.ty==='film'?'film':'show',se:'',ep:'',p:okP(o.p),dl:'',ts:base-added.length});added.push(n)}return}
+      const r=clean(o);if(!r)return;const k=r.n.toLowerCase();
+      if(shows.some(s=>s.n.toLowerCase()===k))dup.push(r.n);
+      else if(gone.includes(k)&&!low.includes(k))del.push(r.n);
+      else{shows.push(r);added.push(r.n);if(gone.includes(k))rmSet(gone.filter(x=>x!==k))}});
+    if(added.length){amode==='w'?saveW():save();draw();$('at').value=''}
+    st.textContent=(added.length?'Added: '+added.join(', ')+'. ':'Nothing new was added. ')+(dup.length?'Already listed: '+dup.join(', ')+'. ':'')+(del.length?'Skipped, you deleted these earlier: '+del.join(', ')+'.':'');
+  }catch(e){st.textContent=errMsg(e)}
+  finally{btn.disabled=false;doneMsg(st)}};
+/* ---------- REFRESH ---------- */
+const SRC=`Data as of ${SNAP.asOf} (whentostream.com, Variety, TV Insider, JioHotstar and Indian OTT roundups).`;
+async function refQ(){const n=applySnap();draw();return n?`${n} update${n>1?'s':''} applied from the latest data. Hand-edited fields were left alone.`:'Already up to date; nothing was changed.'}
+async function refW(){
+  let n=applySnapW(),msg='';
+  const gaps=watch.filter(w=>(w.p||'❓')==='❓'&&!w.pl).slice(0,40);
+  if(gaps.length){try{const arr=await askClaude(PRG(gaps.map(g=>g.n)));
+      arr.forEach(o=>{const w=gaps.find(g=>g.n.toLowerCase()===String(o&&o.n).toLowerCase());if(w&&okP(o.p)!=='❓'){w.p=okP(o.p);n++}});
+      saveW()}catch(e){msg=' (Claude gap-fill: '+errMsg(e)+')'}}
+  draw();return(n?`${n} India OTT value${n>1?'s':''} filled in.`:'Nothing new to fill in.')+msg}
+async function refWeek(which){
+  const w0=mon(TODAY),a=which===3?w0:add(w0,7);let n=0,msg='';
+  try{const arr=await askClaude(PRR(a,add(a,6)));
+    arr.forEach(o=>{const r=clean({...o,kind:'single',start:o.d,label:o.l});if(!r||!r.start||r.start<a||r.start>add(a,6))return;
+      if(!weekRows(a).some(x=>norm(x.s.n)===norm(r.n)&&x.e.d===r.start)&&!shows.some(s=>norm(s.n)===norm(r.n))){pool.push({n:r.n,ty:r.ty,vn:r.vn,l:r.label||'Release',d:r.start,t:r.t,loc:r.loc,p:r.p});n++}});
+    if(n)sv('q-pool-v1',pool)}catch(e){msg=' ('+errMsg(e)+')'}
+  draw();return(n?`${n} new release${n>1?'s':''} added.`:'Nothing new to add.')+msg}
+const REFS={1:{fn:refQ,st:'st1',nm:'list 1'},2:{fn:refW,st:'st2',nm:'the watchlist'},3:{fn:()=>refWeek(3),st:'st3',nm:'list 3'},4:{fn:()=>refWeek(4),st:'st4',nm:'list 4'}};
+async function runRef(k,btn){const r=REFS[k];if(btn)btn.disabled=true;stat(r.st,'Refreshing…');
+  try{stat(r.st,await r.fn())}catch(e){stat(r.st,errMsg(e))}finally{if(btn)btn.disabled=false}}
+[1,2,3,4].forEach(k=>$('r'+k).onclick=()=>confirmBox('Refresh '+REFS[k].nm+'?','Applies the newest data to '+REFS[k].nm+' only. Anything you edited by hand is kept. '+SRC,()=>runRef(k,$('r'+k)),'Yes, refresh'));
+$('gref').onclick=()=>confirmBox('Refresh all lists?','Runs the refresh for lists 1 to 4 in one go and asks Claude, with your permission, to fill in missing OTT platforms. Anything you edited by hand is kept. The page cannot open OTT sites itself, so ▶️ opens each service\'s search page until you save an exact link (right-click ▶️). '+SRC,async()=>{
+  const b=$('gref');b.disabled=true;stat('gst','Refreshing all lists…');
+  for(const k of [1,2,3,4])await runRef(k);
+  stat('gst','Done · '+new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit'})+' IST');b.disabled=false;
+  const noOtt=shows.filter(s=>(ovr[s.n.toLowerCase()]||s.p||'❓')==='❓').length;
+  toast('All lists refreshed · data as of '+SNAP.asOf+(noOtt?' · '+noOtt+' Show List titles still have no OTT':''),'info')},'Yes, refresh all');
+/* ---------- UNDO ---------- */
+const stSnap=()=>JSON.stringify({shows,watch,RPT,RMS,PTR,EPC,ovr,LK,WL,HID,pool,RM:rmGet()});
+function touch(){if(UNRESTORE||UNT)return;                      // several saves from one action count as one change
+  UNT=setTimeout(()=>{UNT=0;const now=stSnap();
+    if(UNLAST===null){UNLAST=now;return}
+    if(now!==UNLAST){UNDO.push({s:UNLAST,l:LASTTOAST||'the last change'});if(UNDO.length>40)UNDO.shift();UNLAST=now;LASTTOAST='';updUndo()}},0)}
+function updUndo(){document.querySelectorAll('.undo').forEach(b=>{b.disabled=!UNDO.length;b.title=UNDO.length?'Undo: '+UNDO[UNDO.length-1].l+' (Ctrl+Z)':'Nothing to undo'})}
+function doUndo(){const u=UNDO.pop();if(!u){toast('Nothing to undo','info');return}
+  UNRESTORE=true;
+  try{const o=JSON.parse(u.s);shows=o.shows;watch=o.watch;RPT=o.RPT;RMS=o.RMS;PTR=o.PTR;EPC=o.EPC;ovr=o.ovr;LK=o.LK;WL=o.WL;HID=o.HID;pool=o.pool;
+    save();saveW();saveR();sv('q-ptr-v1',PTR);sv('q-epc-v1',EPC);sv('q-ott-v1',ovr);sv('q-links-v1',LK);sv('q-watchlinks-v1',WL);sv('q-hid-v1',HID);sv('q-pool-v1',pool);rmSet(o.RM)}
+  finally{UNRESTORE=false}
+  UNLAST=u.s;Object.keys(last).forEach(k=>last[k]='');draw();updUndo();toast('Undid: '+u.l,'info')}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('.undo');if(b&&!b.disabled)doUndo()});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&!e.shiftKey&&String(e.key).toLowerCase()==='z'&&!/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'')){e.preventDefault();doUndo()}});
+/* ---------- START ---------- */
+const CATS={t1:[['sh','Shows'],['of','OTT films'],['th','Theatrical']],t3:[['sh','Shows'],['of','OTT films'],['th','Theatrical']],t2:[['sh','Shows'],['fl','Films']]};
+const CAT={t1:'',t2:'',t3:''};let TAB='t1';
+const catOk=(c,s)=>!c||(c==='sh'&&s.vn!=='T'&&s.ty!=='m')||(c==='of'&&s.vn!=='T'&&s.ty==='m')||(c==='th'&&s.vn==='T');
+function drawCats(){$('cats').innerHTML=(CATS[TAB]||[]).map(([k,l])=>`<button class="chip" data-c="${k}" aria-pressed="${CAT[TAB]===k}">${l}</button>`).join('')}
+$('cats').onclick=e=>{const b=e.target.closest('button[data-c]');if(!b)return;CAT[TAB]=CAT[TAB]===b.dataset.c?'':b.dataset.c;drawCats();draw()};
+function showTab(id){['t1','t2','t3','t4'].forEach(t=>$(t).hidden=t!==id);
+  document.querySelectorAll('.tabs button').forEach(b=>{const on=b.dataset.t===id;b.setAttribute('aria-selected',on?'true':'false');b.tabIndex=on?0:-1});
+  $('gbar').hidden=id==='t4';TAB=id;drawCats()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+showTab('t1');
+const TABS_OF={t1:['b1'],t2:['b2'],t3:['b3','b4']};
+/* ---------- MONTHLY REPORT ---------- */
+let RPT=ld('q-report-v1')||[],RMS=ld('q-report-months-v1'),rEdit=null;
+if(!Array.isArray(RMS)){RMS=[istDay(new Date()).slice(0,7)];sv('q-report-months-v1',RMS)}
+const saveR=()=>{sv('q-report-v1',RPT);sv('q-report-months-v1',RMS)};
+const mName=m=>new Date(m+'-01T00:00:00Z').toLocaleDateString('en-US',{month:'long',year:'numeric',timeZone:'UTC'});
+const addMonth=m=>{const d=new Date(m+'-01T00:00:00Z');d.setUTCMonth(d.getUTCMonth()+1);return d.toISOString().slice(0,7)};
+const allMonths=()=>[...new Set([...RMS,...RPT.map(r=>r.m)])].sort();
+function finaleMonth(s){const f=expand(s).find(e=>e.f&&e.d);return f?f.d.slice(0,7):null}
+function logTick(s,key,on){
+  const epi=isWk(s),weekly=s.ty!=='m'&&s.kind!=='single',src=epi?'s|'+s.id:key;     // weekly shows: one entry, filed under the finale month
+  if(!on){if(epi&&Object.keys(TK).some(x=>x.startsWith(s.id+'|')))return;RPT=RPT.filter(r=>r.src!==src);saveR();return}
+  if(RPT.some(r=>r.src===src))return;
+  const eps=expand(s).filter(e=>e.d),ep=eps.find(x=>s.id+'|'+x.l===key)||eps[0],y=epi?(eps[0]?+eps[0].d.slice(0,4):null):(ep?+ep.d.slice(0,4):null);
+  RPT.push({id:uid(),m:(weekly&&finaleMonth(s))||TODAY.slice(0,7),t:s.n,k:s.ty==='m'?'film':'show',y,src});saveR()}
+function logFilm(x){const y=(x.n.match(/\((\d{4})\)/)||[])[1];
+  RPT.push({id:uid(),m:TODAY.slice(0,7),t:x.n.replace(/\s*\(\d{4}\)\s*$/,''),k:'film',y:y?+y:null,src:'w|'+x.id});saveR()}
+function drawRpt(){
+  setH('rpt',rptMonths().map(m=>{const yr=+m.slice(0,4),rs=RPT.filter(r=>r.m===m);
+    const sel2=(k,cur)=>rs.filter(r=>r.k===k&&((r.y===yr)===cur));
+    const li=(r,cur)=>`<li>${esc(r.t)}${cur?'':` <span class="hint">(${r.y||'year ?'})</span>`} ${lnkH(r.t,r.k==='film',false,'','','',r.y||'')}<button class="x rm" data-id="${r.id}" title="Delete" aria-label="Remove ${esc(r.t)}">❌</button></li>`;
+    const cell=(a,cur)=>a.length?`<ol>${a.map(r=>li(r,cur)).join('')}</ol>`:'';
+    const f1=sel2('film',true),s1=sel2('show',true),f2=sel2('film',false),s2=sel2('show',false);
+    return`<table class="rt"><thead><tr>${rh(0,mName(m)+`<button class="x tdel" data-m="${m}" title="Delete this table" aria-label="Delete the ${mName(m)} table">❌</button>`)}${rh(1,'Films')}${rh(2,'Shows')}${rh(3,'Total')}</tr></thead><tbody>`+
+    `<tr><td class="lbl">Current year releases</td><td>${cell(f1,true)}</td><td>${cell(s1,true)}</td><td class="tt">${f1.length+s1.length}</td></tr>`+
+    `<tr><td class="lbl">Other years</td><td>${cell(f2,false)}</td><td>${cell(s2,false)}</td><td class="tt">${f2.length+s2.length}</td></tr>`+
+    `<tr><td class="lbl">Total</td><td class="tt">${f1.length+f2.length}</td><td class="tt">${s1.length+s2.length}</td><td class="tt">${rs.length}</td></tr></tbody></table>`}).join(''));
+}
+function openRpt(r){rEdit=r||null;const f=$('rpf');f.reset();$('rdt').textContent=r?'Edit entry':'Add to monthly report';
+  f.t.value=r?r.t:'';f.k.value=r?r.k:'film';f.y.value=r&&r.y?r.y:'';f.mo.value=r?r.m:TODAY.slice(0,7);$('rd').showModal();f.t.focus()}
+$('rpt').addEventListener('click',e=>{const t=e.target.closest('button');
+  if(t&&t.classList.contains('tdel')){const m=t.dataset.m,n=RPT.filter(x=>x.m===m).length;
+    confirmBox('Delete this table?','The '+mName(m)+' table'+(n?' and its '+n+' entr'+(n>1?'ies':'y'):'')+' will be removed.',()=>{RPT=RPT.filter(x=>x.m!==m);RMS=RMS.filter(x=>x!==m);saveR();draw();toast('Deleted the '+mName(m)+' table')},'Yes, delete');return}
+  const r=t&&RPT.find(x=>x.id===t.dataset.id);if(!r)return;
+  if(t.classList.contains('ed'))openRpt(r);
+  else if(t.classList.contains('rm'))confirmBox('Remove this entry?','"'+r.t+'" will be removed from the '+mName(r.m)+' report.',()=>{RPT=RPT.filter(x=>x.id!==r.id);saveR();draw();toast('Removed "'+r.t+'" from the report')},'Yes, remove')});
+/* report tables: ordering, column order and widths (shared by every month table) */
+function rptMonths(){const cm=TODAY.slice(0,7),ms=allMonths();return[...ms.filter(m=>m===cm),...ms.filter(m=>m>cm),...ms.filter(m=>m<cm).reverse()]}
+const rh=(c,inner)=>`<th${c===0?' class="mo"':''} data-c="${c}"><span class="gr" title="Drag to move this column" aria-hidden="true">⠿</span><button data-c="${c}" style="all:unset;cursor:text">${inner}</button><span class="rz" title="Drag to resize this column" aria-hidden="true"></span></th>`;
+function rptOrd(){const o=OC.rpt;return Array.isArray(o)&&o.length===4&&[...o].sort().join()==='0,1,2,3'?o:[0,1,2,3]}
+function applyRptW(){const w=CW.rpt;document.querySelectorAll('#rpt table.rt').forEach(t=>{const ths=[...t.querySelectorAll('thead th')];
+  if(Array.isArray(w)){let s=0;ths.forEach(th=>{const v=w[+th.dataset.c]||120;th.style.width=v+'px';s+=v});t.style.width=s+'px';t.style.minWidth=s+'px'}
+  else{t.style.width='';t.style.minWidth='';ths.forEach(th=>th.style.width='')}})}
+function applyRpt(){const o=rptOrd();document.querySelectorAll('#rpt table.rt').forEach(t=>t.querySelectorAll('tr').forEach(tr=>{
+  if(tr.children.length===4){const c=[...tr.children];o.forEach(i=>tr.appendChild(c[i]))}}));applyRptW()}
+let rdr=null,rrz=null;
+document.addEventListener('pointerdown',e=>{const g=e.target.closest&&e.target.closest('.rt .gr');if(!g)return;const th=g.closest('th');
+  rdr={th,tbl:th.closest('table'),from:+th.dataset.c,over:null};try{g.setPointerCapture(e.pointerId)}catch(x){}th.classList.add('dg');e.preventDefault()});
+document.addEventListener('pointermove',e=>{if(!rdr)return;const el=document.elementFromPoint(e.clientX,e.clientY),t=el&&el.closest&&el.closest('th');
+  if(rdr.over)rdr.over.classList.remove('dt');
+  rdr.over=(t&&t!==rdr.th&&t.closest('table')===rdr.tbl)?t:null;if(rdr.over)rdr.over.classList.add('dt')});
+const endRdr=e=>{if(!rdr)return;const d=rdr;rdr=null;d.th.classList.remove('dg');if(!d.over)return;d.over.classList.remove('dt');
+  if(e.type!=='pointerup')return;const o=[...rptOrd()],a=o.indexOf(d.from),b=o.indexOf(+d.over.dataset.c);
+  if(a>=0&&b>=0){o.splice(a,1);o.splice(b,0,d.from);OC.rpt=o;sv('q-cols-v1',OC);last.rpt='';draw()}};
+document.addEventListener('pointerup',endRdr);document.addEventListener('pointercancel',endRdr);
+document.addEventListener('pointerdown',e=>{const g=e.target.closest&&e.target.closest('.rt .rz');if(!g)return;const th=g.closest('th'),c=+th.dataset.c;
+  if(!Array.isArray(CW.rpt)){const w=[];th.closest('tr').querySelectorAll('th').forEach(t=>w[+t.dataset.c]=Math.round(t.getBoundingClientRect().width));CW.rpt=w;applyRptW()}
+  rrz={g,c,x:e.clientX,w:CW.rpt[c]};try{g.setPointerCapture(e.pointerId)}catch(x){}g.classList.add('on');e.preventDefault();e.stopPropagation()});
+document.addEventListener('pointermove',e=>{if(!rrz)return;CW.rpt[rrz.c]=Math.max(50,Math.round(rrz.w+e.clientX-rrz.x));applyRptW()});
+const endRrz=()=>{if(!rrz)return;rrz.g.classList.remove('on');sv('q-wid-v1',CW);rrz=null};
+document.addEventListener('pointerup',endRrz);document.addEventListener('pointercancel',endRrz);
+$('radd').onclick=()=>openRpt(null);
+$('rcx').onclick=()=>$('rd').close();
+$('rnext').onclick=()=>{const m=addMonth(allMonths().pop()||TODAY.slice(0,7));RMS.push(m);saveR();draw();toast('Created the '+mName(m)+' table')};
+$('rpf').onsubmit=()=>{const f=$('rpf'),v={m:f.mo.value||TODAY.slice(0,7),t:f.t.value.trim(),k:f.k.value,y:+f.y.value||null};
+  const was=!!rEdit;if(rEdit)Object.assign(rEdit,v);else RPT.push({id:uid(),...v,src:''});rEdit=null;saveR();draw();toast((was?'Saved changes to "':'Added "')+v.t+'"')};
+/* add by title: look in your own lists first, then ask Claude for the film/show type and release year */
+function localInfo(t){const k=norm(t),s=shows.find(x=>norm(x.n)===k);
+  if(s){const eps=expand(s).filter(e=>e.d);return{t:s.n,k:s.ty==='m'?'film':'show',y:eps.length?+eps[0].d.slice(0,4):null,m:s.ty!=='m'&&s.kind!=='single'?finaleMonth(s):null}}
+  const w=watch.find(x=>norm(x.n)===k);
+  if(w){const y=(w.n.match(/\((\d{4})\)/)||[])[1];return{t:w.n.replace(/\s*\(\d{4}\)\s*$/,''),k:w.ty==='film'?'film':'show',y:y?+y:null,m:null}}
+  return null}
+const PRP=a=>`For each title below decide whether it is a film or a TV show and give the year it was first released. Output ONLY a JSON array of {"t":title as given,"k":"film" or "show","y":year as a number, or null if you are not sure}. Never guess a year. Titles: ${JSON.stringify(a)}`;
+function openAutoR(){amode='r';$('ah').textContent='Add with Claude · Monthly report';
+  $('ahi').textContent='Type titles, one per line. Each is looked up in your lists first, then Claude finds whether it is a film or a show and its release year. Weekly shows go in the month of their finale.';
+  $('at').placeholder='e.g. Dune: Part Two';$('as').textContent='';$('au').showModal();$('at').focus()}
+$('rauto').onclick=openAutoR;
+async function runRptAuto(text){
+  const st=$('as'),btn=$('ar'),list=[...new Set(text.split(/[\n;]+/).map(x=>x.trim()).filter(Boolean))].slice(0,30);
+  btn.disabled=true;st.textContent='Looking up…';
+  try{
+    const cm=TODAY.slice(0,7),out=[],need=[];
+    list.forEach(t=>{const i=localInfo(t);if(i)out.push({...i,m:i.m||cm});else need.push(t)});
+    if(need.length){const arr=await askClaude(PRP(need));
+      need.forEach(t=>{const o=(Array.isArray(arr)?arr:[]).find(x=>x&&norm(String(x.t))===norm(t));
+        out.push({t,k:o&&o.k==='show'?'show':'film',y:o&&+o.y>1880&&+o.y<2100?+o.y:null,m:cm})})}
+    const added=[],dup=[];
+    out.forEach(o=>{if(RPT.some(r=>r.m===o.m&&r.k===o.k&&norm(r.t)===norm(o.t)))dup.push(o.t);
+      else{RPT.push({id:uid(),m:o.m,t:o.t,k:o.k,y:o.y,src:''});added.push(o.t+' ('+(o.y||'year ?')+', '+mName(o.m)+')')}});
+    if(added.length){saveR();draw();$('at').value=''}
+    st.textContent=(added.length?'Added: '+added.join('; ')+'. ':'Nothing new was added. ')+(dup.length?'Already there: '+dup.join(', ')+'. ':'')+(added.some(x=>/year \?/.test(x))?'Use Edit on any entry marked year ? to fix it.':'');
+  }catch(e){st.textContent=errMsg(e)}finally{btn.disabled=false;doneMsg(st)}}
+function reflow(ids){ids.forEach(id=>{reorderHead(id);last[id]=''});draw()}
+function moveCol(h,from,to){const b='b'+h.slice(1),key=TB[b][1],o=[...ordOf(b)],a=o.indexOf(from),t=o.indexOf(to);if(a<0||t<0)return;
+  o.splice(a,1);o.splice(t,0,from);OC[key]=o;sv('q-cols-v1',OC);reflow(Object.keys(TB).filter(i=>TB[i][1]===key))}
+const RTAB={rt1:'b1',rt2:'b2',rt3:'b3',rt4:'b4'};
+Object.keys(RTAB).forEach(k=>$(k).onclick=()=>confirmBox('Reset this table?','Column order and widths go back to the original for this table only.',()=>{
+  const id=RTAB[k],key=TB[id][1];delete OC[key];delete CW[key];sv('q-cols-v1',OC);sv('q-wid-v1',CW);applyWidths(id);reflow([id]);toast('Table reset')},'Yes, reset'));
+$('rtr').onclick=()=>confirmBox('Reset this table?','Column order and widths of the monthly tables go back to the original.',()=>{
+  delete OC.rpt;delete CW.rpt;sv('q-cols-v1',OC);sv('q-wid-v1',CW);last.rpt='';draw();toast('Report tables reset')},'Yes, reset');
+let dragC=null;
+document.addEventListener('pointerdown',e=>{const g=e.target.closest&&e.target.closest('.gr');if(!g||g.closest('table.rt'))return;const th=g.closest('th');
+  dragC={th,h:th.closest('thead').id,from:+th.dataset.c,over:null};try{g.setPointerCapture(e.pointerId)}catch(x){}th.classList.add('dg');e.preventDefault()});
+document.addEventListener('pointermove',e=>{if(!dragC)return;const el=document.elementFromPoint(e.clientX,e.clientY),t=el&&el.closest&&el.closest('th');
+  if(dragC.over)dragC.over.classList.remove('dt');
+  dragC.over=(t&&t!==dragC.th&&t.closest('thead')&&t.closest('thead').id===dragC.h)?t:null;if(dragC.over)dragC.over.classList.add('dt')});
+const endDrag=e=>{if(!dragC)return;const d=dragC;dragC=null;d.th.classList.remove('dg');
+  if(d.over){d.over.classList.remove('dt');if(e.type==='pointerup')moveCol(d.h,d.from,+d.over.dataset.c)}};
+document.addEventListener('pointerup',endDrag);document.addEventListener('pointercancel',endDrag);
+let rz=null;
+document.addEventListener('pointerdown',e=>{const g=e.target.closest&&e.target.closest('.rz');if(!g||g.closest('table.rt'))return;const th=g.closest('th'),h=th.closest('thead').id,b='b'+h.slice(1),key=TB[b][1],c=+th.dataset.c;
+  if(!Array.isArray(CW[key])){const w=[];th.closest('tr').querySelectorAll('th').forEach(t=>w[+t.dataset.c]=Math.round(t.getBoundingClientRect().width));CW[key]=w;Object.keys(TB).filter(i=>TB[i][1]===key).forEach(applyWidths)}
+  rz={g,key,c,x:e.clientX,w:CW[key][c]};try{g.setPointerCapture(e.pointerId)}catch(x){}g.classList.add('on');e.preventDefault();e.stopPropagation()});
+document.addEventListener('pointermove',e=>{if(!rz)return;CW[rz.key][rz.c]=Math.max(40,Math.round(rz.w+e.clientX-rz.x));Object.keys(TB).filter(i=>TB[i][1]===rz.key).forEach(applyWidths)});
+const endRz=()=>{if(!rz)return;rz.g.classList.remove('on');sv('q-wid-v1',CW);rz=null};
+document.addEventListener('pointerup',endRz);document.addEventListener('pointercancel',endRz);
+const THEMES=['original','vibrant','dark'];
+function setTheme(t){if(!THEMES.includes(t))t='original';document.documentElement.setAttribute('data-theme',t);sv('q-theme-v1',t);
+  document.querySelectorAll('#themes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.th===t?'true':'false'))}
+$('themes').onclick=e=>{const b=e.target.closest&&e.target.closest('button[data-th]');if(b){setTheme(b.dataset.th);toast(({original:'Original',vibrant:'Vibrant',dark:'Dark'})[b.dataset.th]+' colour mode on','info')}};
+setTheme(ld('q-theme-v1')||'original');
+applySnap();applySnapW();
+updSort('h1',SORT.q);updSort('h2',SORT.w);applyLbls();draw();setInterval(tick,1000);setInterval(draw,15000);
+UNLAST=stSnap();updUndo();
+/* ---------- one-time Watchlist update: deadlines + Bond and Lord of the Rings ---------- */
+(function(){
+  if(ld('q-mig-wl4'))return;
+  const D1='2026-11-20',D2='2026-12-01',D3='2026-11-11',base=Date.now();let dated=0,added=0;
+  const hg=n=>/^The Hunger Games/i.test(n),mx=new Set([...MCU,...XMEN].map(norm));
+  watch.forEach(w=>{const d=hg(w.n)?D1:mx.has(norm(w.n))?D2:'';if(d&&w.dl!==d){w.dl=d;dated++}});
+  const BOND=['Live and Let Die (1973)','The Man with the Golden Gun (1974)','The Spy Who Loved Me (1977)','Moonraker (1979)','For Your Eyes Only (1981)','Octopussy (1983)','A View to a Kill (1985)','The Living Daylights (1987)','Licence to Kill (1989)','GoldenEye (1995)','Tomorrow Never Dies (1997)','The World Is Not Enough (1999)','Die Another Day (2002)','Casino Royale (2006)','Quantum of Solace (2008)','Skyfall (2012)','Spectre (2015)','No Time to Die (2021)'];
+  const LOTR=['The Lord of the Rings: The Fellowship of the Ring (2001)','The Lord of the Rings: The Two Towers (2002)','The Lord of the Rings: The Return of the King (2003)','The Lord of the Rings: The War of the Rohirrim (2024)'];
+  const put=(n,ty,p,dl,se,i)=>{if(watch.some(w=>norm(w.n)===norm(n))){const w=watch.find(w=>norm(w.n)===norm(n));if(dl&&w.dl!==dl){w.dl=dl;dated++}return}
+    watch.push({id:uid(),n,ty,se:se||'',ep:'',p,dl:dl||'',ts:base-i});added++};
+  BOND.forEach((n,i)=>put(n,'film','❓','','',i));
+  LOTR.forEach((n,i)=>put(n,'film','❓',D3,'',20+i));
+  put('The Lord of the Rings: The Rings of Power','show','Prime Video',D3,'1',30);
+  saveW();sv('q-mig-wl4',1);
+  toast('Watchlist updated: '+dated+' deadlines set, '+added+' titles added (James Bond since 1973, Lord of the Rings films and the Rings of Power show)');
+})();
+</script>
+</body>
+</html>
